@@ -9,68 +9,67 @@
 <body>
     <h1>Valuation Tool</h1>
     <form id="valuationForm">
-        <!-- Input Fields -->
-        <div class="input-field">
-            <label for="revenue2023">Umsatz (Revenue) 2023:</label>
-            <input type="number" id="revenue2023" name="revenue2023">
-        </div>
-        <div class="input-field">
-            <label for="revenue2024">Umsatz (Revenue) 2024:</label>
-            <input type="number" id="revenue2024" name="revenue2024">
-        </div>
-        <div class="input-field">
-            <label for="materialaufwand2023">Materialaufwand 2023:</label>
-            <input type="number" id="materialaufwand2023" name="materialaufwand2023">
-        </div>
-        <div class="input-field">
-            <label for="materialaufwand2024">Materialaufwand 2024:</label>
-            <input type="number" id="materialaufwand2024" name="materialaufwand2024">
+        <div id="input-section">
+            <div class="input-field">
+                <label for="revenue2024">Umsatz (Revenue) 2024:</label>
+                <input type="number" id="revenue2024" name="revenue2024">
+            </div>
+            <div class="input-field">
+                <label for="materialaufwand2024">Materialaufwand 2024:</label>
+                <input type="number" id="materialaufwand2024" name="materialaufwand2024">
+            </div>
+            <div class="input-field">
+                <label for="fte">Vollzeitphysiotherapeuten (FTE):</label>
+                <input type="number" id="fte" name="fte">
+            </div>
+            <button type="button" onclick="calculate()">Calculate</button>
         </div>
         
-        <!-- Output Fields -->
-        <div class="output-field">
-            <label for="netRevenue2023">Nettoumsatz 2023:</label>
-            <input type="number" id="netRevenue2023" name="netRevenue2023" readonly>
+        <div id="output-section" style="display:none;">
+            <div class="output-field">
+                <label for="companyValue2024">Unternehmenswert 2024 (Range):</label>
+                <p id="companyValue2024"></p>
+            </div>
+            <div class="output-field">
+                <p id="message"></p>
+            </div>
         </div>
-        <div class="output-field">
-            <label for="netRevenue2024">Nettoumsatz 2024:</label>
-            <input type="number" id="netRevenue2024" name="netRevenue2024" readonly>
-        </div>
-        <div class="output-field">
-            <label for="companyValue2023">Unternehmenswert 2023:</label>
-            <input type="number" id="companyValue2023" name="companyValue2023" readonly>
-        </div>
-        <div class="output-field">
-            <label for="companyValue2024">Unternehmenswert 2024:</label>
-            <input type="number" id="companyValue2024" name="companyValue2024" readonly>
-        </div>
-        
-        <button type="button" onclick="calculate()">Calculate</button>
     </form>
     <script>
+        function getMultipleRange(ebitda) {
+            if (ebitda < 200000) return [0, 0];
+            if (ebitda < 350000) return [2.5, 3.5];
+            if (ebitda < 600000) return [2.75, 4.0];
+            if (ebitda < 1200000) return [3.0, 4.25];
+            return [0, 0]; // Above 1.2M requires individual assessment
+        }
+        
         function calculate() {
-            const revenue2023 = parseFloat(document.getElementById('revenue2023').value) || 0;
             const revenue2024 = parseFloat(document.getElementById('revenue2024').value) || 0;
-            const materialaufwand2023 = parseFloat(document.getElementById('materialaufwand2023').value) || 0;
             const materialaufwand2024 = parseFloat(document.getElementById('materialaufwand2024').value) || 0;
+            const fte = parseFloat(document.getElementById('fte').value) || 0;
             
-            const netRevenue2023 = revenue2023 - materialaufwand2023;
             const netRevenue2024 = revenue2024 - materialaufwand2024;
+            const ebitda2024 = netRevenue2024 * 0.3; // Example EBITDA calculation
+            const [multipleMin, multipleMax] = getMultipleRange(ebitda2024);
+            const companyValueMin = ebitda2024 * multipleMin;
+            const companyValueMax = ebitda2024 * multipleMax;
             
-            // Hidden calculations
-            const ebitda2023 = netRevenue2023 * 0.3; // Example EBITDA calculation
-            const ebitda2024 = netRevenue2024 * 0.3;
-            const multiple2023 = 2.5;
-            const multiple2024 = 3.5;
+            let message = "";
+            if (ebitda2024 < 200000 && fte < 4) {
+                message = "Praxis ist leider zu klein für eine automatisches Gutachten, bitte wenden Sie sich an Ihren Treuhandexperten.";
+            } else if (ebitda2024 >= 1200000) {
+                message = "Aufgrund der Grösse der Praxis muss dies individuell beurteilt werden, gerne sprechen wir mit Ihnen dazu.";
+            } else {
+                message = "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen, kontaktieren Sie uns.";
+            }
             
-            const companyValue2023 = ebitda2023 * multiple2023;
-            const companyValue2024 = ebitda2024 * multiple2024;
+            document.getElementById('companyValue2024').textContent = `${companyValueMin.toFixed(2)} - ${companyValueMax.toFixed(2)}`;
+            document.getElementById('message').textContent = message;
             
-            // Update visible fields
-            document.getElementById('netRevenue2023').value = netRevenue2023;
-            document.getElementById('netRevenue2024').value = netRevenue2024;
-            document.getElementById('companyValue2023').value = companyValue2023;
-            document.getElementById('companyValue2024').value = companyValue2024;
+            // Hide input section and show results
+            document.getElementById('input-section').style.display = "none";
+            document.getElementById('output-section').style.display = "block";
         }
     </script>
 </body>
