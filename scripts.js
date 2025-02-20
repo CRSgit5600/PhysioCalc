@@ -68,3 +68,23 @@ function sendEmail(email) {
     const netRevenue2024 = document.getElementById('netRevenue2024').value;
     const ebitda2023 = document.getElementById('ebitda2023').value;
     const ebitda2024 = document.getElementById('ebitda2024').value;
+    const multiple2023 = document.getElementById('multiple2023').value;
+    const multiple2024 = document.getElementById('multiple2024').value;
+    const companyValue2023 = document.getElementById('companyValue2023').value;
+    const companyValue2024 = document.getElementById('companyValue2024').value;
+
+    const subject = "Valuation Results";
+    const body = `Here are your valuation results:\n\n
+                  Umsatz (Revenue) 2023: ${revenue2023}\n
+                  Umsatz (Revenue) 2024: ${revenue2024}\n
+                  Nettoumsatz (Net Revenue) 2023: ${netRevenue2023}\n
+                  Nettoumsatz (Net Revenue) 2024: ${netRevenue2024}\n
+                  EBITDA 2023: ${ebitda2023}\n
+                  EBITDA 2024: ${ebitda2024}\n
+                  Multiple 2023: ${multiple2023}\n
+                  Multiple 2024: ${multiple2024}\n
+                  Unternehmenswert (Company Value) 2023: ${companyValue2023}\n
+                  Unternehmenswert (Company Value) 2024: ${companyValue2024}\n`;
+
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
