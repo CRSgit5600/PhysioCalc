@@ -19,12 +19,12 @@
             overflow-x: hidden;
         }
         h1 {
-            font-size: 1.5rem; /* Even smaller title */
+            font-size: 1.5rem;
             font-weight: 300;
             margin: 40px 0 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #00a859; /* SPP green */
+            color: #00a859;
             text-shadow: 0 1px 5px rgba(0, 168, 89, 0.2);
         }
         .container {
@@ -46,13 +46,13 @@
         }
         th, td {
             padding: 14px;
-            text-align: right;
+            text-align: right; /* Default right alignment for all */
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
         th {
-            text-align: left;
             font-weight: 400;
             color: #666666;
+            /* Removed text-align: left; to keep all headers right-aligned */
         }
         input[type="number"], input[type="email"] {
             width: 3cm;
@@ -72,7 +72,7 @@
         button {
             width: 200px;
             padding: 14px;
-            background: #00a859; /* SPP green */
+            background: #00a859;
             color: #ffffff;
             border: none;
             border-radius: 8px;
@@ -82,7 +82,7 @@
             transition: transform 0.2s, background 0.3s;
         }
         button:hover {
-            background: #008f4a; /* Darker SPP green */
+            background: #008f4a;
             transform: translateY(-3px);
         }
         button:active {
@@ -91,13 +91,13 @@
         .output-field {
             margin: 25px 0;
             padding: 20px;
-            background: rgba(0, 168, 89, 0.05); /* Light green tint */
+            background: rgba(0, 168, 89, 0.05);
             border-radius: 10px;
             transition: opacity 0.3s;
         }
         .output-field label {
             font-weight: 700;
-            color: #00a859; /* SPP green */
+            color: #00a859;
         }
         #email-section {
             display: none;
@@ -122,7 +122,7 @@
         }
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.2rem; /* Smaller on mobile */
+                font-size: 1.2rem;
                 margin: 30px 0 15px;
             }
             .container {
@@ -232,7 +232,6 @@
             const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').value) || 0;
             const unternehmerlohn2024 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2024').value) || 0);
 
-            // EBITDA: Revenue + Other Income - Absolute Costs
             const ebitda2024 = revenue2024 + sonstigerErtrag2024 - (
                 materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 +
                 raumkosten2024 + energieEntsorgung2024 + unterhaltRepErsatz2024 +
