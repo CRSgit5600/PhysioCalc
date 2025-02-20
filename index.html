@@ -140,11 +140,6 @@
                 <td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td>
                 <td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td>
             </tr>
-            <tr>
-                <td>Vollzeitphysiotherapeuten (FTE)</td>
-                <td><input type="number" id="fte2023" name="fte2023"></td>
-                <td><input type="number" id="fte2024" name="fte2024"></td>
-            </tr>
         </tbody>
     </table>
 
@@ -173,6 +168,7 @@
     }
 
     function calculate() {
+        // Get input values for 2023 and 2024
         const revenue2023 = parseFloat(document.getElementById('revenue2023').value) || 0;
         const revenue2024 = parseFloat(document.getElementById('revenue2024').value) || 0;
         const materialaufwand2023 = parseFloat(document.getElementById('materialaufwand2023').value) || 0;
@@ -207,12 +203,24 @@
         const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').value) || 0;
         const unternehmerlohn2023 = parseFloat(document.getElementById('unternehmerlohn2023').value) || 0;
         const unternehmerlohn2024 = parseFloat(document.getElementById('unternehmerlohn2024').value) || 0;
-        const fte2023 = parseFloat(document.getElementById('fte2023').value) || 0;
-        const fte2024 = parseFloat(document.getElementById('fte2024').value) || 0;
 
         // Calculate EBITDA for both years
-        const ebitda2023 = revenue2023 - (materialaufwand2023 + personalaufwand2023 + weiterbildungsaufwand2023 + raumkosten2023 + energieEntsorgung2023 + unterhaltRepErsatz2023 + uRfahrzeuge2023 + leasingkosten2023 + sachversicherungen2023 + bueroVerwaltungskosten2023 + beraterhonorare2023 + werbungMarketing2023 + reiseRepKosten2023 + sonstigeOperativeKosten2023 + sonstigerErtrag2023 + unternehmerlohn2023);
-        const ebitda2024 = revenue2024 - (materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 + raumkosten2024 + energieEntsorgung2024 + unterhaltRepErsatz2024 + uRfahrzeuge2024 + leasingkosten2024 + sachversicherungen2024 + bueroVerwaltungskosten2024 + beraterhonorare2024 + werbungMarketing2024 + reiseRepKosten2024 + sonstigeOperativeKosten2024 + sonstigerErtrag2024 + unternehmerlohn2024);
+        const ebitda2023 = revenue2023 - (
+            materialaufwand2023 + personalaufwand2023 + weiterbildungsaufwand2023 +
+            raumkosten2023 + energieEntsorgung2023 + unterhaltRepErsatz2023 +
+            uRfahrzeuge2023 + leasingkosten2023 + sachversicherungen2023 +
+            bueroVerwaltungskosten2023 + beraterhonorare2023 + werbungMarketing2023 +
+            reiseRepKosten2023 + sonstigeOperativeKosten2023 + sonstigerErtrag2023 +
+            unternehmerlohn2023
+        );
+        const ebitda2024 = revenue2024 - (
+            materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 +
+            raumkosten2024 + energieEntsorgung2024 + unterhaltRepErsatz2024 +
+            uRfahrzeuge2024 + leasingkosten2024 + sachversicherungen2024 +
+            bueroVerwaltungskosten2024 + beraterhonorare2024 + werbungMarketing2024 +
+            reiseRepKosten2024 + sonstigeOperativeKosten2024 + sonstigerErtrag2024 +
+            unternehmerlohn2024
+        );
 
         // Calculate valuation based on EBITDA for 2024
         const [lowMultiple, highMultiple] = getMultipleRange(ebitda2024);
