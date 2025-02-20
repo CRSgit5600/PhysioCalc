@@ -323,13 +323,13 @@ combine calculation of EBITDA of this code:
 <script>
 
     function getMultipleRange(ebitda) {
-        if (ebitda < 200000) {
+        if (ebitda24 < 200000) {
             return null;
-        } else if (ebitda >= 200000 && ebitda < 350000) {
+        } else if (ebitda24 >= 200000 && ebitda24 < 350000) {
             return [2.5, 3.5];
-        } else if (ebitda >= 350000 && ebitda < 600000) {
+        } else if (ebitda24 >= 350000 && ebitda24 < 600000) {
             return [2.75, 4.0];
-        } else if (ebitda >= 600000 && ebitda < 1200000) {
+        } else if (ebitda24 >= 600000 && ebitda24 < 1200000) {
             return [3.0, 4.25];
         } else {
             return null;
