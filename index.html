@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Unternehmensbewertung für Schweizer PhysioPraxen</title>
+    <title>Unternehmensbewertung für PhysioPraxen</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -27,6 +27,12 @@
             color: #00a859;
             text-shadow: 0 1px 5px rgba(0, 168, 89, 0.2);
         }
+        .intro-text {
+            font-size: 1rem;
+            margin: 0 0 1rem 0;
+            text-align: center;
+            padding: 0 1rem;
+        }
         .container {
             width: 95%;
             max-width: 1000px;
@@ -46,6 +52,7 @@
             text-align: right;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             font-size: 1rem;
+            vertical-align: middle;
         }
         table thead th {
             font-weight: 400;
@@ -53,13 +60,13 @@
             text-align: right !important;
         }
         input[type="number"], input[type="email"] {
-            width: 3cm; /* Default desktop size */
+            width: 3cm;
             padding: 0.5rem;
             border: 1px solid #e0e0e0;
             border-radius: 0.5rem;
             background: #ffffff;
             color: #333333;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: border-color 0.3s, box-shadow 0.3s;
             box-sizing: border-box;
         }
@@ -106,6 +113,7 @@
             padding: 1.25rem;
             background: rgba(0, 168, 89, 0.05);
             border-radius: 0.625rem;
+            font-size: 1rem;
         }
         #email-section input[type="email"] {
             width: 100%;
@@ -126,42 +134,47 @@
                 font-size: 1.2rem;
                 margin: 1.5rem 0 0.75rem;
             }
+            .intro-text {
+                font-size: 0.85rem;
+                margin: 0 0 0.75rem 0;
+            }
             .container {
-                width: 100%; /* Full width on mobile */
+                width: 100%;
                 padding: 0.75rem;
-                overflow-y: auto; /* Scroll if needed */
-                max-height: calc(100vh - 6rem); /* Fit within viewport */
+                overflow-y: auto;
+                max-height: calc(100vh - 6rem);
             }
             th, td {
-                padding: 0.5rem; /* Smaller padding */
-                font-size: 0.8rem; /* Smaller text */
+                padding: 0.25rem;
+                font-size: 0.75rem;
             }
             input[type="number"] {
-                width: 1.5cm; /* Smaller inputs for mobile */
-                padding: 0.3rem;
-                font-size: 0.8rem;
+                width: 2.5rem;
+                padding: 0.25rem;
+                font-size: 0.65rem;
             }
             button {
-                width: 150px; /* Smaller button */
-                padding: 0.6rem;
+                width: 120px;
+                padding: 0.5rem;
                 font-size: 0.9rem;
             }
             .output-field {
                 margin: 1rem 0;
                 padding: 0.75rem;
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
             #email-section {
                 margin-top: 0.75rem;
                 padding: 0.75rem;
+                font-size: 0.75rem;
             }
             #email-section input[type="email"] {
-                max-width: 100%; /* Full width on mobile */
-                padding: 0.3rem;
-                font-size: 0.8rem;
+                max-width: 100%;
+                padding: 0.25rem;
+                font-size: 0.65rem;
             }
             .disclaimer {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
                 margin: 1.5rem 0;
                 padding: 0 0.75rem;
             }
@@ -169,7 +182,11 @@
     </style>
 </head>
 <body>
-<h1>Unternehmensbewertung</h1>
+<h1>Unternehmensbewertung für PhysioPraxen</h1>
+
+<div class="intro-text">
+    Würden Sie gerne erfahren, was Ihre Praxis wert sein könnte? Der untenstehende Rechner hilft Ihnen.
+</div>
 
 <div class="container">
     <form id="valuationForm">
@@ -226,6 +243,21 @@
 </div>
 
 <script>
+    // Format number with Swiss thousand separator
+    function formatNumberWithSeparator(value) {
+        return value.toLocaleString('de-CH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    // Add thousand separator to input fields on change
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const value = parseFloat(this.value);
+            if (!isNaN(value)) {
+                this.value = formatNumberWithSeparator(value);
+            }
+        });
+    });
+
     function getMultipleRange(ebitda) {
         if (ebitda < 200000) {
             return { multiples: null, message: "Praxis ist leider zu klein für ein automatisches Gutachten, bitte wenden Sie sich an Ihren Treuhandexperten" };
@@ -244,23 +276,52 @@
 
     function calculate() {
         try {
-            const revenue2024 = parseFloat(document.getElementById('revenue2024').value) || 0;
-            const materialaufwand2024 = Math.abs(parseFloat(document.getElementById('materialaufwand2024').value) || 0);
-            const personalaufwand2024 = Math.abs(parseFloat(document.getElementById('personalaufwand2024').value) || 0);
-            const weiterbildungsaufwand2024 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2024').value) || 0);
-            const raumkosten2024 = Math.abs(parseFloat(document.getElementById('raumkosten2024').value) || 0);
-            const energieEntsorgung2024 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2024').value) || 0);
-            const unterhaltRepErsatz2024 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2024').value) || 0);
-            const uRfahrzeuge2024 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2024').value) || 0);
-            const leasingkosten2024 = Math.abs(parseFloat(document.getElementById('leasingkosten2024').value) || 0);
-            const sachversicherungen2024 = Math.abs(parseFloat(document.getElementById('sachversicherungen2024').value) || 0);
-            const bueroVerwaltungskosten2024 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2024').value) || 0);
-            const beraterhonorare2024 = Math.abs(parseFloat(document.getElementById('beraterhonorare2024').value) || 0);
-            const werbungMarketing2024 = Math.abs(parseFloat(document.getElementById('werbungMarketing2024').value) || 0);
-            const reiseRepKosten2024 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2024').value) || 0);
-            const sonstigeOperativeKosten2024 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2024').value) || 0);
-            const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').value) || 0;
-            const unternehmerlohn2024 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2024').value) || 0);
+            // Get input values for 2023
+            const revenue2023 = parseFloat(document.getElementById('revenue2023').value.replace(/’/g, '')) || 0;
+            const materialaufwand2023 = Math.abs(parseFloat(document.getElementById('materialaufwand2023').value.replace(/’/g, '')) || 0);
+            const personalaufwand2023 = Math.abs(parseFloat(document.getElementById('personalaufwand2023').value.replace(/’/g, '')) || 0);
+            const weiterbildungsaufwand2023 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2023').value.replace(/’/g, '')) || 0);
+            const raumkosten2023 = Math.abs(parseFloat(document.getElementById('raumkosten2023').value.replace(/’/g, '')) || 0);
+            const energieEntsorgung2023 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2023').value.replace(/’/g, '')) || 0);
+            const unterhaltRepErsatz2023 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2023').value.replace(/’/g, '')) || 0);
+            const uRfahrzeuge2023 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2023').value.replace(/’/g, '')) || 0);
+            const leasingkosten2023 = Math.abs(parseFloat(document.getElementById('leasingkosten2023').value.replace(/’/g, '')) || 0);
+            const sachversicherungen2023 = Math.abs(parseFloat(document.getElementById('sachversicherungen2023').value.replace(/’/g, '')) || 0);
+            const bueroVerwaltungskosten2023 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2023').value.replace(/’/g, '')) || 0);
+            const beraterhonorare2023 = Math.abs(parseFloat(document.getElementById('beraterhonorare2023').value.replace(/’/g, '')) || 0);
+            const werbungMarketing2023 = Math.abs(parseFloat(document.getElementById('werbungMarketing2023').value.replace(/’/g, '')) || 0);
+            const reiseRepKosten2023 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2023').value.replace(/’/g, '')) || 0);
+            const sonstigeOperativeKosten2023 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2023').value.replace(/’/g, '')) || 0);
+            const sonstigerErtrag2023 = parseFloat(document.getElementById('sonstigerErtrag2023').value.replace(/’/g, '')) || 0;
+            const unternehmerlohn2023 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2023').value.replace(/’/g, '')) || 0);
+
+            // Get input values for 2024
+            const revenue2024 = parseFloat(document.getElementById('revenue2024').value.replace(/’/g, '')) || 0;
+            const materialaufwand2024 = Math.abs(parseFloat(document.getElementById('materialaufwand2024').value.replace(/’/g, '')) || 0);
+            const personalaufwand2024 = Math.abs(parseFloat(document.getElementById('personalaufwand2024').value.replace(/’/g, '')) || 0);
+            const weiterbildungsaufwand2024 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2024').value.replace(/’/g, '')) || 0);
+            const raumkosten2024 = Math.abs(parseFloat(document.getElementById('raumkosten2024').value.replace(/’/g, '')) || 0);
+            const energieEntsorgung2024 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2024').value.replace(/’/g, '')) || 0);
+            const unterhaltRepErsatz2024 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2024').value.replace(/’/g, '')) || 0);
+            const uRfahrzeuge2024 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2024').value.replace(/’/g, '')) || 0);
+            const leasingkosten2024 = Math.abs(parseFloat(document.getElementById('leasingkosten2024').value.replace(/’/g, '')) || 0);
+            const sachversicherungen2024 = Math.abs(parseFloat(document.getElementById('sachversicherungen2024').value.replace(/’/g, '')) || 0);
+            const bueroVerwaltungskosten2024 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2024').value.replace(/’/g, '')) || 0);
+            const beraterhonorare2024 = Math.abs(parseFloat(document.getElementById('beraterhonorare2024').value.replace(/’/g, '')) || 0);
+            const werbungMarketing2024 = Math.abs(parseFloat(document.getElementById('werbungMarketing2024').value.replace(/’/g, '')) || 0);
+            const reiseRepKosten2024 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2024').value.replace(/’/g, '')) || 0);
+            const sonstigeOperativeKosten2024 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2024').value.replace(/’/g, '')) || 0);
+            const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').value.replace(/’/g, '')) || 0;
+            const unternehmerlohn2024 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2024').value.replace(/’/g, '')) || 0);
+
+            // Calculate EBITDA for both years
+            const ebitda2023 = revenue2023 + sonstigerErtrag2023 - (
+                materialaufwand2023 + personalaufwand2023 + weiterbildungsaufwand2023 +
+                raumkosten2023 + energieEntsorgung2023 + unterhaltRepErsatz2023 +
+                uRfahrzeuge2023 + leasingkosten2023 + sachversicherungen2023 +
+                bueroVerwaltungskosten2023 + beraterhonorare2023 + werbungMarketing2023 +
+                reiseRepKosten2023 + sonstigeOperativeKosten2023 + unternehmerlohn2023
+            );
 
             const ebitda2024 = revenue2024 + sonstigerErtrag2024 - (
                 materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 +
@@ -270,9 +331,17 @@
                 reiseRepKosten2024 + sonstigeOperativeKosten2024 + unternehmerlohn2024
             );
 
-            const result = getMultipleRange(ebitda2024);
+            // Choose EBITDA to use (2024 if available, otherwise 2023)
+            let ebitdaUsed = ebitda2024;
+            let ebitdaYearNote = "EBITDA 2024";
+            if (ebitda2024 === 0 && ebitda2023 !== 0) {
+                ebitdaUsed = ebitda2023;
+                ebitdaYearNote = "EBITDA 2023 (da keine Daten für 2024 vorliegen)";
+            }
+
+            const result = getMultipleRange(ebitdaUsed);
             const multiples = result.multiples;
-            const message = result.message;
+            let message = result.message;
 
             const companyValueOutput = document.getElementById('companyValue2024');
             const messageOutput = document.getElementById('message');
@@ -280,23 +349,24 @@
 
             let companyValueLow, companyValueHigh;
             if (multiples) {
-                companyValueLow = ebitda2024 * multiples[0];
-                companyValueHigh = ebitda2024 * multiples[1];
+                companyValueLow = ebitdaUsed * multiples[0];
+                companyValueHigh = ebitdaUsed * multiples[1];
                 companyValueOutput.innerText = `${companyValueLow.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })} - ${companyValueHigh.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
             } else {
                 companyValueLow = companyValueHigh = null;
                 companyValueOutput.innerText = '';
             }
 
-            messageOutput.innerText = `${message}\nEBITDA 2024: ${ebitda2024.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+            messageOutput.innerText = `${message}\n${ebitdaYearNote}: ${ebitdaUsed.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
             document.getElementById('output-section').style.display = 'block';
 
             emailSection.style.display = (companyValueLow && companyValueLow > 200000) ? 'block' : 'none';
 
             currentOutput = {
-                ebitda2024: ebitda2024.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 }),
+                ebitdaUsed: ebitdaUsed.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 }),
                 companyValue: multiples ? `${companyValueLow.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })} - ${companyValueHigh.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : 'N/A',
-                message: message
+                message: message,
+                ebitdaYearNote: ebitdaYearNote
             };
         } catch (error) {
             console.error('Error in calculate:', error);
@@ -315,7 +385,7 @@
         const subject = encodeURIComponent('Unternehmensbewertung Ergebnis');
         const body = encodeURIComponent(
             `Benutzer-Email: ${userEmail}\n` +
-            `EBITDA 2024: ${currentOutput.ebitda2024}\n` +
+            `${currentOutput.ebitdaYearNote}: ${currentOutput.ebitdaUsed}\n` +
             `Unternehmenswert 2024: ${currentOutput.companyValue}\n` +
             `Nachricht: ${currentOutput.message}`
         );
