@@ -19,35 +19,33 @@
             overflow-x: hidden;
         }
         h1 {
-            font-size: clamp(0.9rem, 3vw, 1.5rem);
+            font-size: 1.5rem;
             font-weight: 300;
-            margin: 1rem 0 0.5rem;
+            margin: 2rem 0 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.1rem;
+            letter-spacing: 0.125rem;
             color: #00a859;
             text-shadow: 0 1px 5px rgba(0, 168, 89, 0.2);
         }
         .container {
-            width: 100%;
+            width: 95%;
             max-width: 1000px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 1rem;
-            padding: 1rem;
+            padding: 1.5rem;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
-            overflow-y: auto; /* Allow vertical scroll if needed */
-            max-height: calc(100vh - 6rem); /* Fit within viewport minus header/footer */
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 0.5rem 0;
+            margin: 1rem 0;
         }
         th, td {
-            padding: 0.5rem;
+            padding: 0.875rem;
             text-align: right;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            font-size: clamp(0.75rem, 2.5vw, 1rem);
+            font-size: 1rem;
         }
         table thead th {
             font-weight: 400;
@@ -55,13 +53,13 @@
             text-align: right !important;
         }
         input[type="number"], input[type="email"] {
-            width: 100%;
-            padding: 0.4rem;
+            width: 3cm; /* Default desktop size */
+            padding: 0.5rem;
             border: 1px solid #e0e0e0;
             border-radius: 0.5rem;
             background: #ffffff;
             color: #333333;
-            font-size: clamp(0.75rem, 2.5vw, 1rem);
+            font-size: 1rem;
             transition: border-color 0.3s, box-shadow 0.3s;
             box-sizing: border-box;
         }
@@ -71,13 +69,13 @@
             outline: none;
         }
         button {
-            width: clamp(8rem, 80%, 12.5rem);
-            padding: 0.75rem;
+            width: 200px;
+            padding: 0.875rem;
             background: #00a859;
             color: #ffffff;
             border: none;
             border-radius: 0.5rem;
-            font-size: clamp(0.8rem, 3vw, 1.1rem);
+            font-size: 1.1rem;
             font-weight: 400;
             cursor: pointer;
             transition: transform 0.2s, background 0.3s;
@@ -92,11 +90,11 @@
             transform: translateY(0);
         }
         .output-field {
-            margin: 1rem 0;
-            padding: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.25rem;
             background: rgba(0, 168, 89, 0.05);
             border-radius: 0.625rem;
-            font-size: clamp(0.75rem, 2.5vw, 1rem);
+            font-size: 1rem;
         }
         .output-field label {
             font-weight: 700;
@@ -104,55 +102,68 @@
         }
         #email-section {
             display: none;
-            margin-top: 1rem;
-            padding: 1rem;
+            margin-top: 1.25rem;
+            padding: 1.25rem;
             background: rgba(0, 168, 89, 0.05);
             border-radius: 0.625rem;
         }
         #email-section input[type="email"] {
             width: 100%;
-            margin: 0.5rem 0;
+            max-width: 18.75rem;
+            margin: 0.625rem 0;
         }
         .disclaimer {
-            font-size: clamp(0.65rem, 2vw, 0.9rem);
+            font-size: 0.9rem;
             color: #666666;
             text-align: center;
-            margin: 1.5rem 0;
-            padding: 0 1rem;
+            margin: 2.5rem 0;
+            padding: 0 1.25rem;
+            max-width: 50rem;
             line-height: 1.5;
         }
         @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem;
+                margin: 1.5rem 0 0.75rem;
+            }
             .container {
+                width: 100%; /* Full width on mobile */
                 padding: 0.75rem;
-                max-height: calc(100vh - 4rem); /* Adjust for smaller header/footer */
+                overflow-y: auto; /* Scroll if needed */
+                max-height: calc(100vh - 6rem); /* Fit within viewport */
             }
-            table {
-                display: block;
-            }
-            table thead, table tbody tr {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-            table thead th, table tbody td {
-                flex: 1 1 33%; /* 3 columns fit within width */
-                min-width: 0; /* Prevents overflow */
-                padding: 0.3rem;
-            }
-            table tbody td:first-child {
-                flex: 1 1 100%; /* Full width for labels */
-                text-align: left; /* Better readability on mobile */
-            }
-            table tbody td:nth-child(2), table tbody td:nth-child(3) {
-                flex: 0 0 48%; /* Two inputs side by side */
+            th, td {
+                padding: 0.5rem; /* Smaller padding */
+                font-size: 0.8rem; /* Smaller text */
             }
             input[type="number"] {
-                max-width: none; /* Full width within cell */
+                width: 1.5cm; /* Smaller inputs for mobile */
+                padding: 0.3rem;
+                font-size: 0.8rem;
             }
-        }
-        @media (max-width: 360px) {
-            table tbody td:nth-child(2), table tbody td:nth-child(3) {
-                flex: 0 0 100%; /* Stack inputs vertically on very small screens */
+            button {
+                width: 150px; /* Smaller button */
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+            .output-field {
+                margin: 1rem 0;
+                padding: 0.75rem;
+                font-size: 0.8rem;
+            }
+            #email-section {
+                margin-top: 0.75rem;
+                padding: 0.75rem;
+            }
+            #email-section input[type="email"] {
+                max-width: 100%; /* Full width on mobile */
+                padding: 0.3rem;
+                font-size: 0.8rem;
+            }
+            .disclaimer {
+                font-size: 0.75rem;
+                margin: 1.5rem 0;
+                padding: 0 0.75rem;
             }
         }
     </style>
