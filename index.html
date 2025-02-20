@@ -5,6 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valuation Tool</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #output-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .output-field {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        #input-section {
+            transition: opacity 0.5s ease-out;
+        }
+
+        #input-section.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <h1>Valuation Tool</h1>
