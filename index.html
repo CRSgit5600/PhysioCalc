@@ -1,498 +1,203 @@
-
-
-combine calculation of EBITDA of this code: 
-
-
-
 <!DOCTYPE html>
-
 <html lang="de">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Unternehmensbewertung</title>
-
     <style>
-
         body {
-
             font-family: Arial, sans-serif;
-
         }
-
         table {
-
             width: 100%;
-
             border-collapse: collapse;
-
             margin: 20px 0;
-
         }
-
         th, td {
-
             padding: 10px;
-
             text-align: right;
-
             border: 1px solid #ddd;
-
         }
-
         th {
-
             text-align: left;
-
         }
-
-        input[type="number"] {
-
+        input[type="number"], input[type="email"] {
             width: 150px;
-
             padding: 5px;
-
         }
-
         button {
-
             padding: 10px 15px;
-
             margin-top: 15px;
-
             background-color: #4CAF50;
-
             color: white;
-
             border: none;
-
             cursor: pointer;
-
         }
-
         button:hover {
-
             background-color: #45a049;
-
         }
-
         .output-field {
-
             margin: 20px 0;
-
         }
-
+        #email-section {
+            display: none;
+            margin-top: 15px;
+        }
     </style>
-
 </head>
-
 <body>
-
-
-
 <h1>Unternehmensbewertung für Physiotherapie-Praxis</h1>
 
-
-
 <form id="valuationForm">
-
     <table>
-
         <thead>
-
             <tr>
-
                 <th>Posten</th>
-
                 <th>2023</th>
-
                 <th>2024</th>
-
             </tr>
-
         </thead>
-
         <tbody>
-
-            <tr>
-
-                <td>Umsatz (Revenue)</td>
-
-                <td><input type="number" id="revenue2023" name="revenue2023"></td>
-
-                <td><input type="number" id="revenue2024" name="revenue2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Materialaufwand</td>
-
-                <td><input type="number" id="materialaufwand2023" name="materialaufwand2023"></td>
-
-                <td><input type="number" id="materialaufwand2024" name="materialaufwand2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Personalaufwand</td>
-
-                <td><input type="number" id="personalaufwand2023" name="personalaufwand2023"></td>
-
-                <td><input type="number" id="personalaufwand2024" name="personalaufwand2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Weiterbildungsaufwand</td>
-
-                <td><input type="number" id="weiterbildungsaufwand2023" name="weiterbildungsaufwand2023"></td>
-
-                <td><input type="number" id="weiterbildungsaufwand2024" name="weiterbildungsaufwand2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Raumkosten, Miete</td>
-
-                <td><input type="number" id="raumkosten2023" name="raumkosten2023"></td>
-
-                <td><input type="number" id="raumkosten2024" name="raumkosten2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Energie und Entsorgung</td>
-
-                <td><input type="number" id="energieEntsorgung2023" name="energieEntsorgung2023"></td>
-
-                <td><input type="number" id="energieEntsorgung2024" name="energieEntsorgung2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Unterhalt, Rep., Ersatz</td>
-
-                <td><input type="number" id="unterhaltRepErsatz2023" name="unterhaltRepErsatz2023"></td>
-
-                <td><input type="number" id="unterhaltRepErsatz2024" name="unterhaltRepErsatz2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>U+R Fahrzeuge</td>
-
-                <td><input type="number" id="uRfahrzeuge2023" name="uRfahrzeuge2023"></td>
-
-                <td><input type="number" id="uRfahrzeuge2024" name="uRfahrzeuge2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Leasingkosten</td>
-
-                <td><input type="number" id="leasingkosten2023" name="leasingkosten2023"></td>
-
-                <td><input type="number" id="leasingkosten2024" name="leasingkosten2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Sachversicherungen</td>
-
-                <td><input type="number" id="sachversicherungen2023" name="sachversicherungen2023"></td>
-
-                <td><input type="number" id="sachversicherungen2024" name="sachversicherungen2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Büro- und Verwaltungskosten</td>
-
-                <td><input type="number" id="bueroVerwaltungskosten2023" name="bueroVerwaltungskosten2023"></td>
-
-                <td><input type="number" id="bueroVerwaltungskosten2024" name="bueroVerwaltungskosten2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Beraterhonorare</td>
-
-                <td><input type="number" id="beraterhonorare2023" name="beraterhonorare2023"></td>
-
-                <td><input type="number" id="beraterhonorare2024" name="beraterhonorare2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Werbung/Fachliteratur/Marketing</td>
-
-                <td><input type="number" id="werbungMarketing2023" name="werbungMarketing2023"></td>
-
-                <td><input type="number" id="werbungMarketing2024" name="werbungMarketing2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Reise + Repräsentationskosten</td>
-
-                <td><input type="number" id="reiseRepKosten2023" name="reiseRepKosten2023"></td>
-
-                <td><input type="number" id="reiseRepKosten2024" name="reiseRepKosten2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Sonstige operative Kosten</td>
-
-                <td><input type="number" id="sonstigeOperativeKosten2023" name="sonstigeOperativeKosten2023"></td>
-
-                <td><input type="number" id="sonstigeOperativeKosten2024" name="sonstigeOperativeKosten2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Sonstiger Ertrag</td>
-
-                <td><input type="number" id="sonstigerErtrag2023" name="sonstigerErtrag2023"></td>
-
-                <td><input type="number" id="sonstigerErtrag2024" name="sonstigerErtrag2024"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Unternehmerlohn</td>
-
-                <td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td>
-
-                <td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td>
-
-            </tr>
-
+            <tr><td>Umsatz (Revenue)</td><td><input type="number" id="revenue2023" name="revenue2023"></td><td><input type="number" id="revenue2024" name="revenue2024"></td></tr>
+            <tr><td>Materialaufwand</td><td><input type="number" id="materialaufwand2023" name="materialaufwand2023"></td><td><input type="number" id="materialaufwand2024" name="materialaufwand2024"></td></tr>
+            <tr><td>Personalaufwand</td><td><input type="number" id="personalaufwand2023" name="personalaufwand2023"></td><td><input type="number" id="personalaufwand2024" name="personalaufwand2024"></td></tr>
+            <tr><td>Weiterbildungsaufwand</td><td><input type="number" id="weiterbildungsaufwand2023" name="weiterbildungsaufwand2023"></td><td><input type="number" id="weiterbildungsaufwand2024" name="weiterbildungsaufwand2024"></td></tr>
+            <tr><td>Raumkosten, Miete</td><td><input type="number" id="raumkosten2023" name="raumkosten2023"></td><td><input type="number" id="raumkosten2024" name="raumkosten2024"></td></tr>
+            <tr><td>Energie und Entsorgung</td><td><input type="number" id="energieEntsorgung2023" name="energieEntsorgung2023"></td><td><input type="number" id="energieEntsorgung2024" name="energieEntsorgung2024"></td></tr>
+            <tr><td>Unterhalt, Rep., Ersatz</td><td><input type="number" id="unterhaltRepErsatz2023" name="unterhaltRepErsatz2023"></td><td><input type="number" id="unterhaltRepErsatz2024" name="unterhaltRepErsatz2024"></td></tr>
+            <tr><td>U+R Fahrzeuge</td><td><input type="number" id="uRfahrzeuge2023" name="uRfahrzeuge2023"></td><td><input type="number" id="uRfahrzeuge2024" name="uRfahrzeuge2024"></td></tr>
+            <tr><td>Leasingkosten</td><td><input type="number" id="leasingkosten2023" name="leasingkosten2023"></td><td><input type="number" id="leasingkosten2024" name="leasingkosten2024"></td></tr>
+            <tr><td>Sachversicherungen</td><td><input type="number" id="sachversicherungen2023" name="sachversicherungen2023"></td><td><input type="number" id="sachversicherungen2024" name="sachversicherungen2024"></td></tr>
+            <tr><td>Büro- und Verwaltungskosten</td><td><input type="number" id="bueroVerwaltungskosten2023" name="bueroVerwaltungskosten2023"></td><td><input type="number" id="bueroVerwaltungskosten2024" name="bueroVerwaltungskosten2024"></td></tr>
+            <tr><td>Beraterhonorare</td><td><input type="number" id="beraterhonorare2023" name="beraterhonorare2023"></td><td><input type="number" id="beraterhonorare2024" name="beraterhonorare2024"></td></tr>
+            <tr><td>Werbung/Fachliteratur/Marketing</td><td><input type="number" id="werbungMarketing2023" name="werbungMarketing2023"></td><td><input type="number" id="werbungMarketing2024" name="werbungMarketing2024"></td></tr>
+            <tr><td>Reise + Repräsentationskosten</td><td><input type="number" id="reiseRepKosten2023" name="reiseRepKosten2023"></td><td><input type="number" id="reiseRepKosten2024" name="reiseRepKosten2024"></td></tr>
+            <tr><td>Sonstige operative Kosten</td><td><input type="number" id="sonstigeOperativeKosten2023" name="sonstigeOperativeKosten2023"></td><td><input type="number" id="sonstigeOperativeKosten2024" name="sonstigeOperativeKosten2024"></td></tr>
+            <tr><td>Sonstiger Ertrag</td><td><input type="number" id="sonstigerErtrag2023" name="sonstigerErtrag2023"></td><td><input type="number" id="sonstigerErtrag2024" name="sonstigerErtrag2024"></td></tr>
+            <tr><td>Unternehmerlohn</td><td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td><td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td></tr>
         </tbody>
-
     </table>
-
-
 
     <button type="button" onclick="calculate()">Berechnen</button>
 
-
-
     <div id="output-section" style="display:none;">
-
         <div class="output-field">
-
             <label for="companyValue2024">Unternehmenswert 2024 (Range):</label>
-
             <p id="companyValue2024"></p>
-
         </div>
-
         <div class="output-field">
-
             <p id="message"></p>
-
         </div>
-
+        <div id="email-section">
+            <p>Würden Sie gerne mehr erfahren, sehr gerne melden wir uns bei Ihnen, wenn Sie uns Ihre Emailaddresse geben:</p>
+            <input type="email" id="userEmail" placeholder="Ihre Email-Adresse">
+            <button type="button" onclick="submitEmail()">Absenden</button>
+        </div>
     </div>
-
 </form>
 
-
-
 <script>
-
     function getMultipleRange(ebitda) {
-        if (ebitda24 < 200000) {
-            return null;
-        } else if (ebitda24 >= 200000 && ebitda24 < 350000) {
-            return [2.5, 3.5];
-        } else if (ebitda24 >= 350000 && ebitda24 < 600000) {
-            return [2.75, 4.0];
-        } else if (ebitda24 >= 600000 && ebitda24 < 1200000) {
-            return [3.0, 4.25];
-        } else {
-            return null;
-
+        if (ebitda < 200000) {
+            return { multiples: null, message: "Praxis ist leider zu klein für eine automatisches Gutachten, bitte wenden Sie sich Ihren Treuhandexperten" };
+        } else if (ebitda >= 200000 && ebitda < 350000) {
+            return { multiples: [2.5, 3.5], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen kontaktieren Sie uns:" };
+        } else if (ebitda >= 350000 && ebitda < 600000) {
+            return { multiples: [2.75, 4.0], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen kontaktieren Sie uns:" };
+        } else if (ebitda >= 600000 && ebitda < 1200000) {
+            return { multiples: [3.0, 4.25], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen kontaktieren Sie uns:" };
+        } else if (ebitda >= 1200000) {
+            return { multiples: null, message: "Aufgrund der Grösse der Praxis muss dies individuell beurteilt werden, gerne sprechen wir mit Ihnen dazu:" };
         }
-
     }
 
-
+    let currentOutput = {};
 
     function calculate() {
-
-        // Get input values for 2023 and 2024
-
-        const revenue2023 = parseFloat(document.getElementById('revenue2023').value) || 0;
-
+        // Get input values for 2024
         const revenue2024 = parseFloat(document.getElementById('revenue2024').value) || 0;
-
-        const materialaufwand2023 = parseFloat(document.getElementById('materialaufwand2023').value) || 0;
-
         const materialaufwand2024 = parseFloat(document.getElementById('materialaufwand2024').value) || 0;
-
-        const personalaufwand2023 = parseFloat(document.getElementById('personalaufwand2023').value) || 0;
-
         const personalaufwand2024 = parseFloat(document.getElementById('personalaufwand2024').value) || 0;
-
-        const weiterbildungsaufwand2023 = parseFloat(document.getElementById('weiterbildungsaufwand2023').value) || 0;
-
         const weiterbildungsaufwand2024 = parseFloat(document.getElementById('weiterbildungsaufwand2024').value) || 0;
-
-        const raumkosten2023 = parseFloat(document.getElementById('raumkosten2023').value) || 0;
-
         const raumkosten2024 = parseFloat(document.getElementById('raumkosten2024').value) || 0;
-
-        const energieEntsorgung2023 = parseFloat(document.getElementById('energieEntsorgung2023').value) || 0;
-
         const energieEntsorgung2024 = parseFloat(document.getElementById('energieEntsorgung2024').value) || 0;
-
-        const unterhaltRepErsatz2023 = parseFloat(document.getElementById('unterhaltRepErsatz2023').value) || 0;
-
         const unterhaltRepErsatz2024 = parseFloat(document.getElementById('unterhaltRepErsatz2024').value) || 0;
-
-        const uRfahrzeuge2023 = parseFloat(document.getElementById('uRfahrzeuge2023').value) || 0;
-
         const uRfahrzeuge2024 = parseFloat(document.getElementById('uRfahrzeuge2024').value) || 0;
-
-        const leasingkosten2023 = parseFloat(document.getElementById('leasingkosten2023').value) || 0;
-
         const leasingkosten2024 = parseFloat(document.getElementById('leasingkosten2024').value) || 0;
-
-        const sachversicherungen2023 = parseFloat(document.getElementById('sachversicherungen2023').value) || 0;
-
         const sachversicherungen2024 = parseFloat(document.getElementById('sachversicherungen2024').value) || 0;
-
-        const bueroVerwaltungskosten2023 = parseFloat(document.getElementById('bueroVerwaltungskosten2023').value) || 0;
-
         const bueroVerwaltungskosten2024 = parseFloat(document.getElementById('bueroVerwaltungskosten2024').value) || 0;
-
-        const beraterhonorare2023 = parseFloat(document.getElementById('beraterhonorare2023').value) || 0;
-
         const beraterhonorare2024 = parseFloat(document.getElementById('beraterhonorare2024').value) || 0;
-
-        const werbungMarketing2023 = parseFloat(document.getElementById('werbungMarketing2023').value) || 0;
-
         const werbungMarketing2024 = parseFloat(document.getElementById('werbungMarketing2024').value) || 0;
-
-        const reiseRepKosten2023 = parseFloat(document.getElementById('reiseRepKosten2023').value) || 0;
-
         const reiseRepKosten2024 = parseFloat(document.getElementById('reiseRepKosten2024').value) || 0;
-
-        const sonstigeOperativeKosten2023 = parseFloat(document.getElementById('sonstigeOperativeKosten2023').value) || 0;
-
         const sonstigeOperativeKosten2024 = parseFloat(document.getElementById('sonstigeOperativeKosten2024').value) || 0;
-
-        const sonstigerErtrag2023 = parseFloat(document.getElementById('sonstigerErtrag2023').value) || 0;
-
         const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').value) || 0;
-
-        const unternehmerlohn2023 = parseFloat(document.getElementById('unternehmerlohn2023').value) || 0;
-
         const unternehmerlohn2024 = parseFloat(document.getElementById('unternehmerlohn2024').value) || 0;
 
-
-
-        // Calculate EBITDA for both years
-
-        const ebitda2023 = revenue2023 - (
-
-            materialaufwand2023 + personalaufwand2023 + weiterbildungsaufwand2023 +
-
-            raumkosten2023 + energieEntsorgung2023 + unterhaltRepErsatz2023 +
-
-            uRfahrzeuge2023 + leasingkosten2023 + sachversicherungen2023 +
-
-            bueroVerwaltungskosten2023 + beraterhonorare2023 + werbungMarketing2023 +
-
-            reiseRepKosten2023 + sonstigeOperativeKosten2023 + sonstigerErtrag2023 +
-
-            unternehmerlohn2023
-
-        );
-
-        const ebitda2024 = revenue2024 - (
-
+        // Calculate EBITDA for 2024
+        const ebitda2024 = revenue2024 + sonstigerErtrag2024 - (
             materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 +
-
             raumkosten2024 + energieEntsorgung2024 + unterhaltRepErsatz2024 +
-
             uRfahrzeuge2024 + leasingkosten2024 + sachversicherungen2024 +
-
             bueroVerwaltungskosten2024 + beraterhonorare2024 + werbungMarketing2024 +
-
-            reiseRepKosten2024 + sonstigeOperativeKosten2024 + sonstigerErtrag2024 +
-
-            unternehmerlohn2024
-
+            reiseRepKosten2024 + sonstigeOperativeKosten2024 + unternehmerlohn2024
         );
 
+        // Get multiples and message
+        const result = getMultipleRange(ebitda2024);
+        const multiples = result.multiples;
+        const message = result.message;
 
+        // Display results
+        const companyValueOutput = document.getElementById('companyValue2024');
+        const messageOutput = document.getElementById('message');
+        const emailSection = document.getElementById('email-section');
 
-        // Calculate valuation based on EBITDA for 2024
+        let companyValueLow, companyValueHigh;
+        if (multiples) {
+            companyValueLow = ebitda2024 * multiples[0];
+            companyValueHigh = ebitda2024 * multiples[1];
+            companyValueOutput.innerText = `${companyValueLow.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })} - ${companyValueHigh.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        } else {
+            companyValueOutput.innerText = '';
+            companyValueLow = companyValueHigh = null;
+        }
 
-        const [lowMultiple, highMultiple] = getMultipleRange(ebitda2024);
-
-        const companyValueLow = ebitda2024 * lowMultiple;
-
-        const companyValueHigh = ebitda2024 * highMultiple;
-
-
-
-        // Show results
-
-        document.getElementById('companyValue2024').innerText = CHF ${companyValueLow.toFixed(0)} - CHF ${companyValueHigh.toFixed(0)};
-
-        document.getElementById('message').innerText = EBITDA 2024: CHF ${ebitda2024.toFixed(0)};
-
-
-
+        messageOutput.innerText = `${message}\nEBITDA 2024: ${ebitda2024.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
         document.getElementById('output-section').style.display = 'block';
 
+        // Show email section if valuation > 200,000
+        emailSection.style.display = (companyValueLow && companyValueLow > 200000) ? 'block' : 'none';
+
+        // Store current output for email submission
+        currentOutput = {
+            ebitda2024: ebitda2024.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 }),
+            companyValue: multiples ? `${companyValueLow.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })} - ${companyValueHigh.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : 'N/A',
+            message: message
+        };
     }
 
+    function submitEmail() {
+        const userEmail = document.getElementById('userEmail').value;
+        if (!userEmail) {
+            alert('Bitte geben Sie eine gültige Email-Adresse ein.');
+            return;
+        }
+
+        // Prepare email content
+        const subject = encodeURIComponent('Unternehmensbewertung Ergebnis');
+        const body = encodeURIComponent(
+            `Benutzer-Email: ${userEmail}\n` +
+            `EBITDA 2024: ${currentOutput.ebitda2024}\n` +
+            `Unternehmenswert 2024: ${currentOutput.companyValue}\n` +
+            `Nachricht: ${currentOutput.message}`
+        );
+
+        // Simulate email sending with mailto (client-side workaround)
+        window.location.href = `mailto:christian.schmid@spp.ch?subject=${subject}&body=${body}`;
+
+        // For actual sending, you'd need server-side logic (e.g., via API or form submission)
+        alert('Ihre Anfrage wurde simuliert. In einer echten Anwendung würde dies an christian.schmid@spp.ch gesendet.');
+    }
 </script>
-
-
-
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-Suche
-
-Starte Reasoning für
-
-
-
-
-
