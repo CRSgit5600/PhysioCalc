@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
             color: #ffffff;
             margin: 0;
             padding: 0;
@@ -16,23 +16,29 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 300;
-            margin: 40px 0;
+            margin: 50px 0 20px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #e82127; /* Tesla red */
+            letter-spacing: 3px;
+            color: #ea4335; /* Google red */
+            text-shadow: 0 2px 10px rgba(234, 67, 53, 0.3);
         }
-        form {
-            width: 90%;
-            max-width: 900px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+        .container {
+            width: 95%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: translateY(-5px);
         }
         table {
             width: 100%;
@@ -40,136 +46,158 @@
             margin: 20px 0;
         }
         th, td {
-            padding: 12px;
+            padding: 14px;
             text-align: right;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         th {
             text-align: left;
             font-weight: 400;
-            color: #cccccc;
+            color: #bbbbbb;
         }
         input[type="number"], input[type="email"] {
-            width: 100%;
-            padding: 8px;
+            width: 3cm; /* Fixed width as requested */
+            padding: 10px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
             font-size: 1rem;
-            transition: background 0.3s;
+            transition: background 0.3s, box-shadow 0.3s;
         }
         input[type="number"]:focus, input[type="email"]:focus {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 5px rgba(234, 67, 53, 0.5);
             outline: none;
         }
         button {
-            padding: 12px 24px;
-            background: #e82127;
+            width: 200px; /* Wider button */
+            padding: 14px;
+            background: #ea4335;
             color: #ffffff;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
             font-weight: 400;
             cursor: pointer;
             transition: transform 0.2s, background 0.3s;
         }
         button:hover {
-            background: #c71d23;
-            transform: translateY(-2px);
+            background: #d32f2f;
+            transform: translateY(-3px);
         }
         button:active {
             transform: translateY(0);
         }
         .output-field {
-            margin: 20px 0;
-            padding: 15px;
+            margin: 25px 0;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            border-radius: 10px;
+            transition: opacity 0.3s;
         }
         .output-field label {
             font-weight: 700;
-            color: #e82127;
+            color: #ea4335;
         }
         #email-section {
             display: none;
             margin-top: 20px;
-            padding: 15px;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            border-radius: 10px;
         }
         #email-section input[type="email"] {
+            width: 100%;
+            max-width: 300px;
             margin: 10px 0;
-            width: calc(100% - 16px);
+        }
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #888888;
+            text-align: center;
+            margin: 40px 0;
+            padding: 0 20px;
+            max-width: 800px;
+            line-height: 1.5;
         }
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+                margin: 30px 0 15px;
             }
-            form {
-                width: 95%;
-                padding: 10px;
+            .container {
+                width: 90%;
+                padding: 15px;
             }
             th, td {
-                padding: 8px;
+                padding: 10px;
+            }
+            button {
+                width: 150px;
             }
         }
     </style>
 </head>
 <body>
-<h1>Unternehmensbewertung für Physiotherapie-Praxis</h1>
+<h1>Unternehmensbewertung</h1>
 
-<form id="valuationForm">
-    <table>
-        <thead>
-            <tr>
-                <th>Posten</th>
-                <th>2023</th>
-                <th>2024</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>Umsatz (Revenue)</td><td><input type="number" id="revenue2023" name="revenue2023"></td><td><input type="number" id="revenue2024" name="revenue2024"></td></tr>
-            <tr><td>Materialaufwand</td><td><input type="number" id="materialaufwand2023" name="materialaufwand2023"></td><td><input type="number" id="materialaufwand2024" name="materialaufwand2024"></td></tr>
-            <tr><td>Personalaufwand</td><td><input type="number" id="personalaufwand2023" name="personalaufwand2023"></td><td><input type="number" id="personalaufwand2024" name="personalaufwand2024"></td></tr>
-            <tr><td>Weiterbildungsaufwand</td><td><input type="number" id="weiterbildungsaufwand2023" name="weiterbildungsaufwand2023"></td><td><input type="number" id="weiterbildungsaufwand2024" name="weiterbildungsaufwand2024"></td></tr>
-            <tr><td>Raumkosten, Miete</td><td><input type="number" id="raumkosten2023" name="raumkosten2023"></td><td><input type="number" id="raumkosten2024" name="raumkosten2024"></td></tr>
-            <tr><td>Energie und Entsorgung</td><td><input type="number" id="energieEntsorgung2023" name="energieEntsorgung2023"></td><td><input type="number" id="energieEntsorgung2024" name="energieEntsorgung2024"></td></tr>
-            <tr><td>Unterhalt, Rep., Ersatz</td><td><input type="number" id="unterhaltRepErsatz2023" name="unterhaltRepErsatz2023"></td><td><input type="number" id="unterhaltRepErsatz2024" name="unterhaltRepErsatz2024"></td></tr>
-            <tr><td>U+R Fahrzeuge</td><td><input type="number" id="uRfahrzeuge2023" name="uRfahrzeuge2023"></td><td><input type="number" id="uRfahrzeuge2024" name="uRfahrzeuge2024"></td></tr>
-            <tr><td>Leasingkosten</td><td><input type="number" id="leasingkosten2023" name="leasingkosten2023"></td><td><input type="number" id="leasingkosten2024" name="leasingkosten2024"></td></tr>
-            <tr><td>Sachversicherungen</td><td><input type="number" id="sachversicherungen2023" name="sachversicherungen2023"></td><td><input type="number" id="sachversicherungen2024" name="sachversicherungen2024"></td></tr>
-            <tr><td>Büro- und Verwaltungskosten</td><td><input type="number" id="bueroVerwaltungskosten2023" name="bueroVerwaltungskosten2023"></td><td><input type="number" id="bueroVerwaltungskosten2024" name="bueroVerwaltungskosten2024"></td></tr>
-            <tr><td>Beraterhonorare</td><td><input type="number" id="beraterhonorare2023" name="beraterhonorare2023"></td><td><input type="number" id="beraterhonorare2024" name="beraterhonorare2024"></td></tr>
-            <tr><td>Werbung/Fachliteratur/Marketing</td><td><input type="number" id="werbungMarketing2023" name="werbungMarketing2023"></td><td><input type="number" id="werbungMarketing2024" name="werbungMarketing2024"></td></tr>
-            <tr><td>Reise + Repräsentationskosten</td><td><input type="number" id="reiseRepKosten2023" name="reiseRepKosten2023"></td><td><input type="number" id="reiseRepKosten2024" name="reiseRepKosten2024"></td></tr>
-            <tr><td>Sonstige operative Kosten</td><td><input type="number" id="sonstigeOperativeKosten2023" name="sonstigeOperativeKosten2023"></td><td><input type="number" id="sonstigeOperativeKosten2024" name="sonstigeOperativeKosten2024"></td></tr>
-            <tr><td>Sonstiger Ertrag</td><td><input type="number" id="sonstigerErtrag2023" name="sonstigerErtrag2023"></td><td><input type="number" id="sonstigerErtrag2024" name="sonstigerErtrag2024"></td></tr>
-            <tr><td>Unternehmerlohn</td><td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td><td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td></tr>
-        </tbody>
-    </table>
+<div class="container">
+    <form id="valuationForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>Posten</th>
+                    <th>2023</th>
+                    <th>2024</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Umsatz (Revenue)</td><td><input type="number" id="revenue2023" name="revenue2023"></td><td><input type="number" id="revenue2024" name="revenue2024"></td></tr>
+                <tr><td>Materialaufwand</td><td><input type="number" id="materialaufwand2023" name="materialaufwand2023"></td><td><input type="number" id="materialaufwand2024" name="materialaufwand2024"></td></tr>
+                <tr><td>Personalaufwand</td><td><input type="number" id="personalaufwand2023" name="personalaufwand2023"></td><td><input type="number" id="personalaufwand2024" name="personalaufwand2024"></td></tr>
+                <tr><td>Weiterbildungsaufwand</td><td><input type="number" id="weiterbildungsaufwand2023" name="weiterbildungsaufwand2023"></td><td><input type="number" id="weiterbildungsaufwand2024" name="weiterbildungsaufwand2024"></td></tr>
+                <tr><td>Raumkosten, Miete</td><td><input type="number" id="raumkosten2023" name="raumkosten2023"></td><td><input type="number" id="raumkosten2024" name="raumkosten2024"></td></tr>
+                <tr><td>Energie und Entsorgung</td><td><input type="number" id="energieEntsorgung2023" name="energieEntsorgung2023"></td><td><input type="number" id="energieEntsorgung2024" name="energieEntsorgung2024"></td></tr>
+                <tr><td>Unterhalt, Rep., Ersatz</td><td><input type="number" id="unterhaltRepErsatz2023" name="unterhaltRepErsatz2023"></td><td><input type="number" id="unterhaltRepErsatz2024" name="unterhaltRepErsatz2024"></td></tr>
+                <tr><td>U+R Fahrzeuge</td><td><input type="number" id="uRfahrzeuge2023" name="uRfahrzeuge2023"></td><td><input type="number" id="uRfahrzeuge2024" name="uRfahrzeuge2024"></td></tr>
+                <tr><td>Leasingkosten</td><td><input type="number" id="leasingkosten2023" name="leasingkosten2023"></td><td><input type="number" id="leasingkosten2024" name="leasingkosten2024"></td></tr>
+                <tr><td>Sachversicherungen</td><td><input type="number" id="sachversicherungen2023" name="sachversicherungen2023"></td><td><input type="number" id="sachversicherungen2024" name="sachversicherungen2024"></td></tr>
+                <tr><td>Büro- und Verwaltungskosten</td><td><input type="number" id="bueroVerwaltungskosten2023" name="bueroVerwaltungskosten2023"></td><td><input type="number" id="bueroVerwaltungskosten2024" name="bueroVerwaltungskosten2024"></td></tr>
+                <tr><td>Beraterhonorare</td><td><input type="number" id="beraterhonorare2023" name="beraterhonorare2023"></td><td><input type="number" id="beraterhonorare2024" name="beraterhonorare2024"></td></tr>
+                <tr><td>Werbung/Fachliteratur/Marketing</td><td><input type="number" id="werbungMarketing2023" name="werbungMarketing2023"></td><td><input type="number" id="werbungMarketing2024" name="werbungMarketing2024"></td></tr>
+                <tr><td>Reise + Repräsentationskosten</td><td><input type="number" id="reiseRepKosten2023" name="reiseRepKosten2023"></td><td><input type="number" id="reiseRepKosten2024" name="reiseRepKosten2024"></td></tr>
+                <tr><td>Sonstige operative Kosten</td><td><input type="number" id="sonstigeOperativeKosten2023" name="sonstigeOperativeKosten2023"></td><td><input type="number" id="sonstigeOperativeKosten2024" name="sonstigeOperativeKosten2024"></td></tr>
+                <tr><td>Sonstiger Ertrag</td><td><input type="number" id="sonstigerErtrag2023" name="sonstigerErtrag2023"></td><td><input type="number" id="sonstigerErtrag2024" name="sonstigerErtrag2024"></td></tr>
+                <tr><td>Unternehmerlohn</td><td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td><td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td></tr>
+            </tbody>
+        </table>
 
-    <button type="button" onclick="calculate()">Berechnen</button>
+        <button type="button" onclick="calculate()">Berechnen</button>
 
-    <div id="output-section" style="display:none;">
-        <div class="output-field">
-            <label for="companyValue2024">Unternehmenswert 2024 (Range):</label>
-            <p id="companyValue2024"></p>
+        <div id="output-section" style="display:none;">
+            <div class="output-field">
+                <label for="companyValue2024">Unternehmenswert 2024 (Range):</label>
+                <p id="companyValue2024"></p>
+            </div>
+            <div class="output-field">
+                <p id="message"></p>
+            </div>
+            <div id="email-section">
+                <p>Würden Sie gerne mehr erfahren, sehr gerne melden wir uns bei Ihnen, wenn Sie uns Ihre Emailaddresse geben:</p>
+                <input type="email" id="userEmail" placeholder="Ihre Email-Adresse">
+                <button type="button" onclick="submitEmail()">Absenden</button>
+            </div>
         </div>
-        <div class="output-field">
-            <p id="message"></p>
-        </div>
-        <div id="email-section">
-            <p>Würden Sie gerne mehr erfahren, sehr gerne melden wir uns bei Ihnen, wenn Sie uns Ihre Emailaddresse geben:</p>
-            <input type="email" id="userEmail" placeholder="Ihre Email-Adresse">
-            <button type="button" onclick="submitEmail()">Absenden</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
+
+<div class="disclaimer">
+    Hinweis: Jede Haftung wird abgelehnt. Die hier dargestellten Berechnungen dienen ausschließlich illustrativen und Unterhaltungszwecken und stellen keine rechtliche, finanzielle oder sonstige Beratung dar.
+</div>
 
 <script>
     function getMultipleRange(ebitda) {
-        console.log('EBITDA:', ebitda);
         if (ebitda < 200000) {
             return { multiples: null, message: "Praxis ist leider zu klein für eine automatisches Gutachten, bitte wenden Sie sich Ihren Treuhandexperten" };
         } else if (ebitda >= 200000 && ebitda < 350000) {
@@ -186,26 +214,26 @@
     let currentOutput = {};
 
     function calculate() {
-        console.log('Calculate function triggered');
         try {
             const revenue2024 = parseFloat(document.getElementById('revenue2024').value) || 0;
-            const materialaufwand2024 = parseFloat(document.getElementById('materialaufwand2024').value) || 0;
-            const personalaufwand2024 = parseFloat(document.getElementById('personalaufwand2024').value) || 0;
-            const weiterbildungsaufwand2024 = parseFloat(document.getElementById('weiterbildungsaufwand2024').value) || 0;
-            const raumkosten2024 = parseFloat(document.getElementById('raumkosten2024').value) || 0;
-            const energieEntsorgung2024 = parseFloat(document.getElementById('energieEntsorgung2024').value) || 0;
-            const unterhaltRepErsatz2024 = parseFloat(document.getElementById('unterhaltRepErsatz2024').value) || 0;
-            const uRfahrzeuge2024 = parseFloat(document.getElementById('uRfahrzeuge2024').value) || 0;
-            const leasingkosten2024 = parseFloat(document.getElementById('leasingkosten2024').value) || 0;
-            const sachversicherungen2024 = parseFloat(document.getElementById('sachversicherungen2024').value) || 0;
-            const bueroVerwaltungskosten2024 = parseFloat(document.getElementById('bueroVerwaltungskosten2024').value) || 0;
-            const beraterhonorare2024 = parseFloat(document.getElementById('beraterhonorare2024').value) || 0;
-            const werbungMarketing2024 = parseFloat(document.getElementById('werbungMarketing2024').value) || 0;
-            const reiseRepKosten2024 = parseFloat(document.getElementById('reiseRepKosten2024').value) || 0;
-            const sonstigeOperativeKosten2024 = parseFloat(document.getElementById('sonstigeOperativeKosten2024').value) || 0;
+            const materialaufwand2024 = Math.abs(parseFloat(document.getElementById('materialaufwand2024').value) || 0);
+            const personalaufwand2024 = Math.abs(parseFloat(document.getElementById('personalaufwand2024').value) || 0);
+            const weiterbildungsaufwand2024 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2024').value) || 0);
+            const raumkosten2024 = Math.abs(parseFloat(document.getElementById('raumkosten2024').value) || 0);
+            const energieEntsorgung2024 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2024').value) || 0);
+            const unterhaltRepErsatz2024 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2024').value) || 0);
+            const uRfahrzeuge2024 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2024').value) || 0);
+            const leasingkosten2024 = Math.abs(parseFloat(document.getElementById('leasingkosten2024').value) || 0);
+            const sachversicherungen2024 = Math.abs(parseFloat(document.getElementById('sachversicherungen2024').value) || 0);
+            const bueroVerwaltungskosten2024 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2024').value) || 0);
+            const beraterhonorare2024 = Math.abs(parseFloat(document.getElementById('beraterhonorare2024').value) || 0);
+            const werbungMarketing2024 = Math.abs(parseFloat(document.getElementById('werbungMarketing2024').value) || 0);
+            const reiseRepKosten2024 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2024').value) || 0);
+            const sonstigeOperativeKosten2024 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2024').value) || 0);
             const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').value) || 0;
-            const unternehmerlohn2024 = parseFloat(document.getElementById('unternehmerlohn2024').value) || 0;
+            const unternehmerlohn2024 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2024').value) || 0);
 
+            // EBITDA: Revenue + Other Income - Absolute Costs
             const ebitda2024 = revenue2024 + sonstigerErtrag2024 - (
                 materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 +
                 raumkosten2024 + energieEntsorgung2024 + unterhaltRepErsatz2024 +
@@ -242,8 +270,6 @@
                 companyValue: multiples ? `${companyValueLow.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })} - ${companyValueHigh.toLocaleString('de-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : 'N/A',
                 message: message
             };
-
-            console.log('Calculation complete:', currentOutput);
         } catch (error) {
             console.error('Error in calculate:', error);
             document.getElementById('message').innerText = 'Ein Fehler ist aufgetreten. Bitte überprüfen Sie Ihre Eingaben.';
@@ -252,7 +278,6 @@
     }
 
     function submitEmail() {
-        console.log('Submit email triggered');
         const userEmail = document.getElementById('userEmail').value;
         if (!userEmail) {
             alert('Bitte geben Sie eine gültige Email-Adresse ein.');
