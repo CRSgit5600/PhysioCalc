@@ -215,7 +215,7 @@
                 <tr><td>Reise und Repräsentationskosten</td><td><input type="number" id="reiseRepKosten2023" name="reiseRepKosten2023"></td><td><input type="number" id="reiseRepKosten2024" name="reiseRepKosten2024"></td></tr>
                 <tr><td>Sonstige operative Kosten</td><td><input type="number" id="sonstigeOperativeKosten2023" name="sonstigeOperativeKosten2023"></td><td><input type="number" id="sonstigeOperativeKosten2024" name="sonstigeOperativeKosten2024"></td></tr>
                 <tr><td>Sonstiger Ertrag</td><td><input type="number" id="sonstigerErtrag2023" name="sonstigerErtrag2023"></td><td><input type="number" id="sonstigerErtrag2024" name="sonstigerErtrag2024"></td></tr>
-                <tr><td>Unternehmerlohn (Sofern nicht im Personalaufwand)</td><td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td><td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td></tr>
+                <tr><td>Unternehmerlohn</td><td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td><td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td></tr>
             </tbody>
         </table>
 
@@ -248,12 +248,20 @@
         return value.toLocaleString('de-CH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     }
 
-    // Add thousand separator to input fields on change
+    // Add thousand separator to input fields on blur (not input)
     document.querySelectorAll('input[type="number"]').forEach(input => {
-        input.addEventListener('change', function() {
-            const value = parseFloat(this.value);
+        input.addEventListener('blur', function() {
+            const value = parseFloat(this.value.replace(/’/g, ''));
             if (!isNaN(value)) {
                 this.value = formatNumberWithSeparator(value);
+            }
+        });
+        // Prevent interference during typing
+        input.addEventListener('input', function() {
+            // Remove separators temporarily while typing
+            const rawValue = this.value.replace(/’/g, '');
+            if (!isNaN(parseFloat(rawValue))) {
+                this.dataset.rawValue = rawValue; // Store raw value for calculation
             }
         });
     });
@@ -277,42 +285,42 @@
     function calculate() {
         try {
             // Get input values for 2023
-            const revenue2023 = parseFloat(document.getElementById('revenue2023').value.replace(/’/g, '')) || 0;
-            const materialaufwand2023 = Math.abs(parseFloat(document.getElementById('materialaufwand2023').value.replace(/’/g, '')) || 0);
-            const personalaufwand2023 = Math.abs(parseFloat(document.getElementById('personalaufwand2023').value.replace(/’/g, '')) || 0);
-            const weiterbildungsaufwand2023 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2023').value.replace(/’/g, '')) || 0);
-            const raumkosten2023 = Math.abs(parseFloat(document.getElementById('raumkosten2023').value.replace(/’/g, '')) || 0);
-            const energieEntsorgung2023 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2023').value.replace(/’/g, '')) || 0);
-            const unterhaltRepErsatz2023 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2023').value.replace(/’/g, '')) || 0);
-            const uRfahrzeuge2023 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2023').value.replace(/’/g, '')) || 0);
-            const leasingkosten2023 = Math.abs(parseFloat(document.getElementById('leasingkosten2023').value.replace(/’/g, '')) || 0);
-            const sachversicherungen2023 = Math.abs(parseFloat(document.getElementById('sachversicherungen2023').value.replace(/’/g, '')) || 0);
-            const bueroVerwaltungskosten2023 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2023').value.replace(/’/g, '')) || 0);
-            const beraterhonorare2023 = Math.abs(parseFloat(document.getElementById('beraterhonorare2023').value.replace(/’/g, '')) || 0);
-            const werbungMarketing2023 = Math.abs(parseFloat(document.getElementById('werbungMarketing2023').value.replace(/’/g, '')) || 0);
-            const reiseRepKosten2023 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2023').value.replace(/’/g, '')) || 0);
-            const sonstigeOperativeKosten2023 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2023').value.replace(/’/g, '')) || 0);
-            const sonstigerErtrag2023 = parseFloat(document.getElementById('sonstigerErtrag2023').value.replace(/’/g, '')) || 0;
-            const unternehmerlohn2023 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2023').value.replace(/’/g, '')) || 0);
+            const revenue2023 = parseFloat(document.getElementById('revenue2023').dataset.rawValue || document.getElementById('revenue2023').value.replace(/’/g, '')) || 0;
+            const materialaufwand2023 = Math.abs(parseFloat(document.getElementById('materialaufwand2023').dataset.rawValue || document.getElementById('materialaufwand2023').value.replace(/’/g, '')) || 0);
+            const personalaufwand2023 = Math.abs(parseFloat(document.getElementById('personalaufwand2023').dataset.rawValue || document.getElementById('personalaufwand2023').value.replace(/’/g, '')) || 0);
+            const weiterbildungsaufwand2023 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2023').dataset.rawValue || document.getElementById('weiterbildungsaufwand2023').value.replace(/’/g, '')) || 0);
+            const raumkosten2023 = Math.abs(parseFloat(document.getElementById('raumkosten2023').dataset.rawValue || document.getElementById('raumkosten2023').value.replace(/’/g, '')) || 0);
+            const energieEntsorgung2023 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2023').dataset.rawValue || document.getElementById('energieEntsorgung2023').value.replace(/’/g, '')) || 0);
+            const unterhaltRepErsatz2023 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2023').dataset.rawValue || document.getElementById('unterhaltRepErsatz2023').value.replace(/’/g, '')) || 0);
+            const uRfahrzeuge2023 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2023').dataset.rawValue || document.getElementById('uRfahrzeuge2023').value.replace(/’/g, '')) || 0);
+            const leasingkosten2023 = Math.abs(parseFloat(document.getElementById('leasingkosten2023').dataset.rawValue || document.getElementById('leasingkosten2023').value.replace(/’/g, '')) || 0);
+            const sachversicherungen2023 = Math.abs(parseFloat(document.getElementById('sachversicherungen2023').dataset.rawValue || document.getElementById('sachversicherungen2023').value.replace(/’/g, '')) || 0);
+            const bueroVerwaltungskosten2023 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2023').dataset.rawValue || document.getElementById('bueroVerwaltungskosten2023').value.replace(/’/g, '')) || 0);
+            const beraterhonorare2023 = Math.abs(parseFloat(document.getElementById('beraterhonorare2023').dataset.rawValue || document.getElementById('beraterhonorare2023').value.replace(/’/g, '')) || 0);
+            const werbungMarketing2023 = Math.abs(parseFloat(document.getElementById('werbungMarketing2023').dataset.rawValue || document.getElementById('werbungMarketing2023').value.replace(/’/g, '')) || 0);
+            const reiseRepKosten2023 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2023').dataset.rawValue || document.getElementById('reiseRepKosten2023').value.replace(/’/g, '')) || 0);
+            const sonstigeOperativeKosten2023 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2023').dataset.rawValue || document.getElementById('sonstigeOperativeKosten2023').value.replace(/’/g, '')) || 0);
+            const sonstigerErtrag2023 = parseFloat(document.getElementById('sonstigerErtrag2023').dataset.rawValue || document.getElementById('sonstigerErtrag2023').value.replace(/’/g, '')) || 0;
+            const unternehmerlohn2023 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2023').dataset.rawValue || document.getElementById('unternehmerlohn2023').value.replace(/’/g, '')) || 0);
 
             // Get input values for 2024
-            const revenue2024 = parseFloat(document.getElementById('revenue2024').value.replace(/’/g, '')) || 0;
-            const materialaufwand2024 = Math.abs(parseFloat(document.getElementById('materialaufwand2024').value.replace(/’/g, '')) || 0);
-            const personalaufwand2024 = Math.abs(parseFloat(document.getElementById('personalaufwand2024').value.replace(/’/g, '')) || 0);
-            const weiterbildungsaufwand2024 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2024').value.replace(/’/g, '')) || 0);
-            const raumkosten2024 = Math.abs(parseFloat(document.getElementById('raumkosten2024').value.replace(/’/g, '')) || 0);
-            const energieEntsorgung2024 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2024').value.replace(/’/g, '')) || 0);
-            const unterhaltRepErsatz2024 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2024').value.replace(/’/g, '')) || 0);
-            const uRfahrzeuge2024 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2024').value.replace(/’/g, '')) || 0);
-            const leasingkosten2024 = Math.abs(parseFloat(document.getElementById('leasingkosten2024').value.replace(/’/g, '')) || 0);
-            const sachversicherungen2024 = Math.abs(parseFloat(document.getElementById('sachversicherungen2024').value.replace(/’/g, '')) || 0);
-            const bueroVerwaltungskosten2024 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2024').value.replace(/’/g, '')) || 0);
-            const beraterhonorare2024 = Math.abs(parseFloat(document.getElementById('beraterhonorare2024').value.replace(/’/g, '')) || 0);
-            const werbungMarketing2024 = Math.abs(parseFloat(document.getElementById('werbungMarketing2024').value.replace(/’/g, '')) || 0);
-            const reiseRepKosten2024 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2024').value.replace(/’/g, '')) || 0);
-            const sonstigeOperativeKosten2024 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2024').value.replace(/’/g, '')) || 0);
-            const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').value.replace(/’/g, '')) || 0;
-            const unternehmerlohn2024 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2024').value.replace(/’/g, '')) || 0);
+            const revenue2024 = parseFloat(document.getElementById('revenue2024').dataset.rawValue || document.getElementById('revenue2024').value.replace(/’/g, '')) || 0;
+            const materialaufwand2024 = Math.abs(parseFloat(document.getElementById('materialaufwand2024').dataset.rawValue || document.getElementById('materialaufwand2024').value.replace(/’/g, '')) || 0);
+            const personalaufwand2024 = Math.abs(parseFloat(document.getElementById('personalaufwand2024').dataset.rawValue || document.getElementById('personalaufwand2024').value.replace(/’/g, '')) || 0);
+            const weiterbildungsaufwand2024 = Math.abs(parseFloat(document.getElementById('weiterbildungsaufwand2024').dataset.rawValue || document.getElementById('weiterbildungsaufwand2024').value.replace(/’/g, '')) || 0);
+            const raumkosten2024 = Math.abs(parseFloat(document.getElementById('raumkosten2024').dataset.rawValue || document.getElementById('raumkosten2024').value.replace(/’/g, '')) || 0);
+            const energieEntsorgung2024 = Math.abs(parseFloat(document.getElementById('energieEntsorgung2024').dataset.rawValue || document.getElementById('energieEntsorgung2024').value.replace(/’/g, '')) || 0);
+            const unterhaltRepErsatz2024 = Math.abs(parseFloat(document.getElementById('unterhaltRepErsatz2024').dataset.rawValue || document.getElementById('unterhaltRepErsatz2024').value.replace(/’/g, '')) || 0);
+            const uRfahrzeuge2024 = Math.abs(parseFloat(document.getElementById('uRfahrzeuge2024').dataset.rawValue || document.getElementById('uRfahrzeuge2024').value.replace(/’/g, '')) || 0);
+            const leasingkosten2024 = Math.abs(parseFloat(document.getElementById('leasingkosten2024').dataset.rawValue || document.getElementById('leasingkosten2024').value.replace(/’/g, '')) || 0);
+            const sachversicherungen2024 = Math.abs(parseFloat(document.getElementById('sachversicherungen2024').dataset.rawValue || document.getElementById('sachversicherungen2024').value.replace(/’/g, '')) || 0);
+            const bueroVerwaltungskosten2024 = Math.abs(parseFloat(document.getElementById('bueroVerwaltungskosten2024').dataset.rawValue || document.getElementById('bueroVerwaltungskosten2024').value.replace(/’/g, '')) || 0);
+            const beraterhonorare2024 = Math.abs(parseFloat(document.getElementById('beraterhonorare2024').dataset.rawValue || document.getElementById('beraterhonorare2024').value.replace(/’/g, '')) || 0);
+            const werbungMarketing2024 = Math.abs(parseFloat(document.getElementById('werbungMarketing2024').dataset.rawValue || document.getElementById('werbungMarketing2024').value.replace(/’/g, '')) || 0);
+            const reiseRepKosten2024 = Math.abs(parseFloat(document.getElementById('reiseRepKosten2024').dataset.rawValue || document.getElementById('reiseRepKosten2024').value.replace(/’/g, '')) || 0);
+            const sonstigeOperativeKosten2024 = Math.abs(parseFloat(document.getElementById('sonstigeOperativeKosten2024').dataset.rawValue || document.getElementById('sonstigeOperativeKosten2024').value.replace(/’/g, '')) || 0);
+            const sonstigerErtrag2024 = parseFloat(document.getElementById('sonstigerErtrag2024').dataset.rawValue || document.getElementById('sonstigerErtrag2024').value.replace(/’/g, '')) || 0;
+            const unternehmerlohn2024 = Math.abs(parseFloat(document.getElementById('unternehmerlohn2024').dataset.rawValue || document.getElementById('unternehmerlohn2024').value.replace(/’/g, '')) || 0);
 
             // Calculate EBITDA for both years
             const ebitda2023 = revenue2023 + sonstigerErtrag2023 - (
