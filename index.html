@@ -46,13 +46,13 @@
         }
         th, td {
             padding: 14px;
-            text-align: right; /* Ensure right alignment for all */
+            text-align: right;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        th {
+        table thead th {
             font-weight: 400;
             color: #666666;
-            text-align: right; /* Explicitly right-align headers */
+            text-align: right !important;
         }
         input[type="number"], input[type="email"] {
             width: 3cm;
@@ -152,20 +152,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Umsatz (Revenue)</td><td><input type="number" id="revenue2023" name="revenue2023"></td><td><input type="number" id="revenue2024" name="revenue2024"></td></tr>
+                <tr><td>Umsatz</td><td><input type="number" id="revenue2023" name="revenue2023"></td><td><input type="number" id="revenue2024" name="revenue2024"></td></tr>
                 <tr><td>Materialaufwand</td><td><input type="number" id="materialaufwand2023" name="materialaufwand2023"></td><td><input type="number" id="materialaufwand2024" name="materialaufwand2024"></td></tr>
                 <tr><td>Personalaufwand</td><td><input type="number" id="personalaufwand2023" name="personalaufwand2023"></td><td><input type="number" id="personalaufwand2024" name="personalaufwand2024"></td></tr>
                 <tr><td>Weiterbildungsaufwand</td><td><input type="number" id="weiterbildungsaufwand2023" name="weiterbildungsaufwand2023"></td><td><input type="number" id="weiterbildungsaufwand2024" name="weiterbildungsaufwand2024"></td></tr>
                 <tr><td>Raumkosten, Miete</td><td><input type="number" id="raumkosten2023" name="raumkosten2023"></td><td><input type="number" id="raumkosten2024" name="raumkosten2024"></td></tr>
                 <tr><td>Energie und Entsorgung</td><td><input type="number" id="energieEntsorgung2023" name="energieEntsorgung2023"></td><td><input type="number" id="energieEntsorgung2024" name="energieEntsorgung2024"></td></tr>
-                <tr><td>Unterhalt, Rep., Ersatz</td><td><input type="number" id="unterhaltRepErsatz2023" name="unterhaltRepErsatz2023"></td><td><input type="number" id="unterhaltRepErsatz2024" name="unterhaltRepErsatz2024"></td></tr>
-                <tr><td>U+R Fahrzeuge</td><td><input type="number" id="uRfahrzeuge2023" name="uRfahrzeuge2023"></td><td><input type="number" id="uRfahrzeuge2024" name="uRfahrzeuge2024"></td></tr>
+                <tr><td>Unterhalt, Reparatur und Ersatz</td><td><input type="number" id="unterhaltRepErsatz2023" name="unterhaltRepErsatz2023"></td><td><input type="number" id="unterhaltRepErsatz2024" name="unterhaltRepErsatz2024"></td></tr>
+                <tr><td>Fahrzeugaufwand</td><td><input type="number" id="uRfahrzeuge2023" name="uRfahrzeuge2023"></td><td><input type="number" id="uRfahrzeuge2024" name="uRfahrzeuge2024"></td></tr>
                 <tr><td>Leasingkosten</td><td><input type="number" id="leasingkosten2023" name="leasingkosten2023"></td><td><input type="number" id="leasingkosten2024" name="leasingkosten2024"></td></tr>
                 <tr><td>Sachversicherungen</td><td><input type="number" id="sachversicherungen2023" name="sachversicherungen2023"></td><td><input type="number" id="sachversicherungen2024" name="sachversicherungen2024"></td></tr>
                 <tr><td>Büro- und Verwaltungskosten</td><td><input type="number" id="bueroVerwaltungskosten2023" name="bueroVerwaltungskosten2023"></td><td><input type="number" id="bueroVerwaltungskosten2024" name="bueroVerwaltungskosten2024"></td></tr>
                 <tr><td>Beraterhonorare</td><td><input type="number" id="beraterhonorare2023" name="beraterhonorare2023"></td><td><input type="number" id="beraterhonorare2024" name="beraterhonorare2024"></td></tr>
                 <tr><td>Werbung/Fachliteratur/Marketing</td><td><input type="number" id="werbungMarketing2023" name="werbungMarketing2023"></td><td><input type="number" id="werbungMarketing2024" name="werbungMarketing2024"></td></tr>
-                <tr><td>Reise + Repräsentationskosten</td><td><input type="number" id="reiseRepKosten2023" name="reiseRepKosten2023"></td><td><input type="number" id="reiseRepKosten2024" name="reiseRepKosten2024"></td></tr>
+                <tr><td>Reise und Repräsentationskosten</td><td><input type="number" id="reiseRepKosten2023" name="reiseRepKosten2023"></td><td><input type="number" id="reiseRepKosten2024" name="reiseRepKosten2024"></td></tr>
                 <tr><td>Sonstige operative Kosten</td><td><input type="number" id="sonstigeOperativeKosten2023" name="sonstigeOperativeKosten2023"></td><td><input type="number" id="sonstigeOperativeKosten2024" name="sonstigeOperativeKosten2024"></td></tr>
                 <tr><td>Sonstiger Ertrag</td><td><input type="number" id="sonstigerErtrag2023" name="sonstigerErtrag2023"></td><td><input type="number" id="sonstigerErtrag2024" name="sonstigerErtrag2024"></td></tr>
                 <tr><td>Unternehmerlohn</td><td><input type="number" id="unternehmerlohn2023" name="unternehmerlohn2023"></td><td><input type="number" id="unternehmerlohn2024" name="unternehmerlohn2024"></td></tr>
@@ -183,7 +183,7 @@
                 <p id="message"></p>
             </div>
             <div id="email-section">
-                <p>Würden Sie gerne mehr erfahren, sehr gerne melden wir uns bei Ihnen, wenn Sie uns Ihre Emailaddresse geben:</p>
+                <p>Würden Sie gerne mehr erfahren, sehr gerne melden wir uns bei Ihnen, wenn Sie uns Ihre Emailadresse geben:</p>
                 <input type="email" id="userEmail" placeholder="Ihre Email-Adresse">
                 <button type="button" onclick="submitEmail()">Absenden</button>
             </div>
@@ -192,13 +192,13 @@
 </div>
 
 <div class="disclaimer">
-    Hinweis: Jede Haftung wird abgelehnt. Die hier dargestellten Berechnungen dienen ausschließlich illustrativen und Unterhaltungszwecken und stellen keine rechtliche, finanzielle oder sonstige Beratung dar.
+    Hinweis: Jede Haftung wird abgelehnt. Die hier dargestellten Berechnungen dienen ausschliesslich illustrativen und Unterhaltungszwecken und stellen keine rechtliche, finanzielle oder sonstige Beratung dar.
 </div>
 
 <script>
     function getMultipleRange(ebitda) {
         if (ebitda < 200000) {
-            return { multiples: null, message: "Praxis ist leider zu klein für eine automatisches Gutachten, bitte wenden Sie sich Ihren Treuhandexperten" };
+            return { multiples: null, message: "Praxis ist leider zu klein für ein automatisches Gutachten, bitte wenden Sie sich an Ihren Treuhandexperten" };
         } else if (ebitda >= 200000 && ebitda < 350000) {
             return { multiples: [2.5, 3.5], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen kontaktieren Sie uns:" };
         } else if (ebitda >= 350000 && ebitda < 600000) {
