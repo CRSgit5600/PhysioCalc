@@ -52,6 +52,13 @@ function calculate() {
     document.getElementById('multiple2024').value = multiple2024;
     document.getElementById('companyValue2023').value = companyValue2023;
     document.getElementById('companyValue2024').value = companyValue2024;
+
+    // Show output fields and request details button
+    const outputRows = document.querySelectorAll('.output-row');
+    outputRows.forEach(row => {
+        row.style.display = '';
+    });
+    document.getElementById('requestDetailsButton').style.display = '';
 }
 
 function requestContractDetails() {
@@ -86,5 +93,5 @@ function sendEmail(email) {
                   Unternehmenswert (Company Value) 2023: ${companyValue2023}\n
                   Unternehmenswert (Company Value) 2024: ${companyValue2024}\n`;
 
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:christian.schmid@spp.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}&cc=${email}`;
 }
