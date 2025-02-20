@@ -248,22 +248,6 @@
         return value.toLocaleString('de-CH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     }
 
-    // Add thousand separator to input fields on blur (not input)
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-        input.addEventListener('blur', function() {
-            const value = parseFloat(this.value.replace(/’/g, ''));
-            if (!isNaN(value)) {
-                this.value = formatNumberWithSeparator(value);
-            }
-        });
-        // Prevent interference during typing
-        input.addEventListener('input', function() {
-            // Remove separators temporarily while typing
-            const rawValue = this.value.replace(/’/g, '');
-            if (!isNaN(parseFloat(rawValue))) {
-                this.dataset.rawValue = rawValue; // Store raw value for calculation
-            }
-        });
     });
 
     function getMultipleRange(ebitda) {
