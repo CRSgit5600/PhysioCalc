@@ -9,170 +9,117 @@
 <body>
     <h1>Valuation Tool</h1>
     <form id="valuationForm">
-        <!-- Input Fields -->
-        <div class="input-field">
-            <label for="revenue2023">Umsatz (Revenue) 2023:</label>
-            <input type="number" id="revenue2023" name="revenue2023">
-        </div>
-        <div class="input-field">
-            <label for="revenue2024">Umsatz (Revenue) 2024:</label>
-            <input type="number" id="revenue2024" name="revenue2024">
-        </div>
-        <div class="input-field">
-            <label for="materialaufwand2023">Materialaufwand/Fremdleistungen 2023:</label>
-            <input type="number" id="materialaufwand2023" name="materialaufwand2023">
-        </div>
-        <div class="input-field">
-            <label for="materialaufwand2024">Materialaufwand/Fremdleistungen 2024:</label>
-            <input type="number" id="materialaufwand2024" name="materialaufwand2024">
-        </div>
-        <div class="input-field">
-            <label for="personalaufwand2023">Personalaufwand 2023:</label>
-            <input type="number" id="personalaufwand2023" name="personalaufwand2023">
-        </div>
-        <div class="input-field">
-            <label for="personalaufwand2024">Personalaufwand 2024:</label>
-            <input type="number" id="personalaufwand2024" name="personalaufwand2024">
-        </div>
-        <div class="input-field">
-            <label for="weiterbildungsaufwand2023">Weiterbildungsaufwand 2023:</label>
-            <input type="number" id="weiterbildungsaufwand2023" name="weiterbildungsaufwand2023">
-        </div>
-        <div class="input-field">
-            <label for="weiterbildungsaufwand2024">Weiterbildungsaufwand 2024:</label>
-            <input type="number" id="weiterbildungsaufwand2024" name="weiterbildungsaufwand2024">
-        </div>
-        <div class="input-field">
-            <label for="raumkosten2023">Raumkosten, Miete 2023:</label>
-            <input type="number" id="raumkosten2023" name="raumkosten2023">
-        </div>
-        <div class="input-field">
-            <label for="raumkosten2024">Raumkosten, Miete 2024:</label>
-            <input type="number" id="raumkosten2024" name="raumkosten2024">
-        </div>
-        <div class="input-field">
-            <label for="energie2023">Energie und Entsorgung 2023:</label>
-            <input type="number" id="energie2023" name="energie2023">
-        </div>
-        <div class="input-field">
-            <label for="energie2024">Energie und Entsorgung 2024:</label>
-            <input type="number" id="energie2024" name="energie2024">
-        </div>
-        <div class="input-field">
-            <label for="unterhalt2023">Unterhalt, Rep., Ersatz 2023:</label>
-            <input type="number" id="unterhalt2023" name="unterhalt2023">
-        </div>
-        <div class="input-field">
-            <label for="unterhalt2024">Unterhalt, Rep., Ersatz 2024:</label>
-            <input type="number" id="unterhalt2024" name="unterhalt2024">
-        </div>
-        <div class="input-field">
-            <label for="fahrzeuge2023">U+R Fahrzeuge 2023:</label>
-            <input type="number" id="fahrzeuge2023" name="fahrzeuge2023">
-        </div>
-        <div class="input-field">
-            <label for="fahrzeuge2024">U+R Fahrzeuge 2024:</label>
-            <input type="number" id="fahrzeuge2024" name="fahrzeuge2024">
-        </div>
-        <div class="input-field">
-            <label for="leasingkosten2023">Leasingkosten 2023:</label>
-            <input type="number" id="leasingkosten2023" name="leasingkosten2023">
-        </div>
-        <div class="input-field">
-            <label for="leasingkosten2024">Leasingkosten 2024:</label>
-            <input type="number" id="leasingkosten2024" name="leasingkosten2024">
-        </div>
-        <div class="input-field">
-            <label for="sachversicherungen2023">Sachversicherungen 2023:</label>
-            <input type="number" id="sachversicherungen2023" name="sachversicherungen2023">
-        </div>
-        <div class="input-field">
-            <label for="sachversicherungen2024">Sachversicherungen 2024:</label>
-            <input type="number" id="sachversicherungen2024" name="sachversicherungen2024">
-        </div>
-        <div class="input-field">
-            <label for="verwaltungskosten2023">Büro-und Verwaltungskosten 2023:</label>
-            <input type="number" id="verwaltungskosten2023" name="verwaltungskosten2023">
-        </div>
-        <div class="input-field">
-            <label for="verwaltungskosten2024">Büro-und Verwaltungskosten 2024:</label>
-            <input type="number" id="verwaltungskosten2024" name="verwaltungskosten2024">
-        </div>
-        <div class="input-field">
-            <label for="beraterhonorare2023">Beraterhonorare 2023:</label>
-            <input type="number" id="beraterhonorare2023" name="beraterhonorare2023">
-        </div>
-        <div class="input-field">
-            <label for="beraterhonorare2024">Beraterhonorare 2024:</label>
-            <input type="number" id="beraterhonorare2024" name="beraterhonorare2024">
-        </div>
-        <div class="input-field">
-            <label for="werbung2023">Werbung/Fachliteratur/Marketing 2023:</label>
-            <input type="number" id="werbung2023" name="werbung2023">
-        </div>
-        <div class="input-field">
-            <label for="werbung2024">Werbung/Fachliteratur/Marketing 2024:</label>
-            <input type="number" id="werbung2024" name="werbung2024">
-        </div>
-        <div class="input-field">
-            <label for="reise2023">Reise+Repräsentationskosten 2023:</label>
-            <input type="number" id="reise2023" name="reise2023">
-        </div>
-        <div class="input-field">
-            <label for="reise2024">Reise+Repräsentationskosten 2024:</label>
-            <input type="number" id="reise2024" name="reise2024">
-        </div>
-        <div class="input-field">
-            <label for="operativeKosten2023">Sonstige operative Kosten 2023:</label>
-            <input type="number" id="operativeKosten2023" name="operativeKosten2023">
-        </div>
-        <div class="input-field">
-            <label for="operativeKosten2024">Sonstige operative Kosten 2024:</label>
-            <input type="number" id="operativeKosten2024" name="operativeKosten2024">
-        </div>
-        <div class="input-field">
-            <label for="ertrag2023">Sonstiger Ertrag 2023:</label>
-            <input type="number" id="ertrag2023" name="ertrag2023">
-        </div>
-        <div class="input-field">
-            <label for="ertrag2024">Sonstiger Ertrag 2024:</label>
-            <input type="number" id="ertrag2024" name="ertrag2024">
-        </div>
-        
-        <!-- Output Fields -->
-        <div class="output-field">
-            <label for="netRevenue2023">Nettoumsatz (Net Revenue) 2023:</label>
-            <input type="number" id="netRevenue2023" name="netRevenue2023" readonly>
-        </div>
-        <div class="output-field">
-            <label for="netRevenue2024">Nettoumsatz (Net Revenue) 2024:</label>
-            <input type="number" id="netRevenue2024" name="netRevenue2024" readonly>
-        </div>
-        <div class="output-field">
-            <label for="ebitda2023">EBITDA 2023:</label>
-            <input type="number" id="ebitda2023" name="ebitda2023" readonly>
-        </div>
-        <div class="output-field">
-            <label for="ebitda2024">EBITDA 2024:</label>
-            <input type="number" id="ebitda2024" name="ebitda2024" readonly>
-        </div>
-        <div class="output-field">
-            <label for="multiple2023">Multiple 2023:</label>
-            <input type="number" id="multiple2023" name="multiple2023" readonly>
-        </div>
-        <div class="output-field">
-            <label for="multiple2024">Multiple 2024:</label>
-            <input type="number" id="multiple2024" name="multiple2024" readonly>
-        </div>
-        <div class="output-field">
-            <label for="companyValue2023">Unternehmenswert (Company Value) 2023:</label>
-            <input type="number" id="companyValue2023" name="companyValue2023" readonly>
-        </div>
-        <div class="output-field">
-            <label for="companyValue2024">Unternehmenswert (Company Value) 2024:</label>
-            <input type="number" id="companyValue2024" name="companyValue2024" readonly>
-        </div>
-
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>2023</th>
+                    <th>2024</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Umsatz (Revenue)</td>
+                    <td><input type="number" id="revenue2023" name="revenue2023"></td>
+                    <td><input type="number" id="revenue2024" name="revenue2024"></td>
+                </tr>
+                <tr>
+                    <td>Materialaufwand/Fremdleistungen</td>
+                    <td><input type="number" id="materialaufwand2023" name="materialaufwand2023"></td>
+                    <td><input type="number" id="materialaufwand2024" name="materialaufwand2024"></td>
+                </tr>
+                <tr>
+                    <td>Personalaufwand</td>
+                    <td><input type="number" id="personalaufwand2023" name="personalaufwand2023"></td>
+                    <td><input type="number" id="personalaufwand2024" name="personalaufwand2024"></td>
+                </tr>
+                <tr>
+                    <td>Weiterbildungsaufwand</td>
+                    <td><input type="number" id="weiterbildungsaufwand2023" name="weiterbildungsaufwand2023"></td>
+                    <td><input type="number" id="weiterbildungsaufwand2024" name="weiterbildungsaufwand2024"></td>
+                </tr>
+                <tr>
+                    <td>Raumkosten, Miete</td>
+                    <td><input type="number" id="raumkosten2023" name="raumkosten2023"></td>
+                    <td><input type="number" id="raumkosten2024" name="raumkosten2024"></td>
+                </tr>
+                <tr>
+                    <td>Energie und Entsorgung</td>
+                    <td><input type="number" id="energie2023" name="energie2023"></td>
+                    <td><input type="number" id="energie2024" name="energie2024"></td>
+                </tr>
+                <tr>
+                    <td>Unterhalt, Rep., Ersatz</td>
+                    <td><input type="number" id="unterhalt2023" name="unterhalt2023"></td>
+                    <td><input type="number" id="unterhalt2024" name="unterhalt2024"></td>
+                </tr>
+                <tr>
+                    <td>U+R Fahrzeuge</td>
+                    <td><input type="number" id="fahrzeuge2023" name="fahrzeuge2023"></td>
+                    <td><input type="number" id="fahrzeuge2024" name="fahrzeuge2024"></td>
+                </tr>
+                <tr>
+                    <td>Leasingkosten</td>
+                    <td><input type="number" id="leasingkosten2023" name="leasingkosten2023"></td>
+                    <td><input type="number" id="leasingkosten2024" name="leasingkosten2024"></td>
+                </tr>
+                <tr>
+                    <td>Sachversicherungen</td>
+                    <td><input type="number" id="sachversicherungen2023" name="sachversicherungen2023"></td>
+                    <td><input type="number" id="sachversicherungen2024" name="sachversicherungen2024"></td>
+                </tr>
+                <tr>
+                    <td>Büro-und Verwaltungskosten</td>
+                    <td><input type="number" id="verwaltungskosten2023" name="verwaltungskosten2023"></td>
+                    <td><input type="number" id="verwaltungskosten2024" name="verwaltungskosten2024"></td>
+                </tr>
+                <tr>
+                    <td>Beraterhonorare</td>
+                    <td><input type="number" id="beraterhonorare2023" name="beraterhonorare2023"></td>
+                    <td><input type="number" id="beraterhonorare2024" name="beraterhonorare2024"></td>
+                </tr>
+                <tr>
+                    <td>Werbung/Fachliteratur/Marketing</td>
+                    <td><input type="number" id="werbung2023" name="werbung2023"></td>
+                    <td><input type="number" id="werbung2024" name="werbung2024"></td>
+                </tr>
+                <tr>
+                    <td>Reise+Repräsentationskosten</td>
+                    <td><input type="number" id="reise2023" name="reise2023"></td>
+                    <td><input type="number" id="reise2024" name="reise2024"></td>
+                </tr>
+                <tr>
+                    <td>Sonstige operative Kosten</td>
+                    <td><input type="number" id="operativeKosten2023" name="operativeKosten2023"></td>
+                    <td><input type="number" id="operativeKosten2024" name="operativeKosten2024"></td>
+                </tr>
+                <tr>
+                    <td>Sonstiger Ertrag</td>
+                    <td><input type="number" id="ertrag2023" name="ertrag2023"></td>
+                    <td><input type="number" id="ertrag2024" name="ertrag2024"></td>
+                </tr>
+                <tr>
+                    <td>Nettoumsatz (Net Revenue)</td>
+                    <td><input type="number" id="netRevenue2023" name="netRevenue2023" readonly></td>
+                    <td><input type="number" id="netRevenue2024" name="netRevenue2024" readonly></td>
+                </tr>
+                <tr>
+                    <td>EBITDA</td>
+                    <td><input type="number" id="ebitda2023" name="ebitda2023" readonly></td>
+                    <td><input type="number" id="ebitda2024" name="ebitda2024" readonly></td>
+                </tr>
+                <tr>
+                    <td>Multiple</td>
+                    <td><input type="number" id="multiple2023" name="multiple2023" readonly></td>
+                    <td><input type="number" id="multiple2024" name="multiple2024" readonly></td>
+                </tr>
+                <tr>
+                    <td>Unternehmenswert (Company Value)</td>
+                    <td><input type="number" id="companyValue2023" name="companyValue2023" readonly></td>
+                    <td><input type="number" id="companyValue2024" name="companyValue2024" readonly></td>
+                </tr>
+            </tbody>
+        </table>
         <button type="button" onclick="calculate()">Calculate</button>
         <button type="button" onclick="requestContractDetails()">Request Contract Details</button>
     </form>
