@@ -246,15 +246,15 @@
 
     function getMultipleRange(ebitda) {
         if (ebitda < 200000) {
-            return { multiples: null, message: "Praxis ist leider zu klein für ein automatisches Gutachten, bitte wenden Sie sich an Ihren Treuhandexperten" };
+            return { multiples: null, message: "Praxis ist leider zu klein für ein automatisches Gutachten. Bitte wenden Sie sich an Ihren Treuhandexperten oder Ihre Bank." };
         } else if (ebitda >= 200000 && ebitda < 350000) {
-            return { multiples: [2.5, 3.5], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen kontaktieren Sie uns!" };
+            return { multiples: [2.5, 3.5], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den untenstehenden Unternehmenswert aufweisen." };
         } else if (ebitda >= 350000 && ebitda < 600000) {
-            return { multiples: [2.75, 4.0], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen kontaktieren Sie uns!" };
+            return { multiples: [2.75, 4.0], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen." };
         } else if (ebitda >= 600000 && ebitda < 1200000) {
-            return { multiples: [3.0, 4.25], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen kontaktieren Sie uns!" };
+            return { multiples: [3.0, 4.25], message: "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen." };
         } else if (ebitda >= 1200000) {
-            return { multiples: null, message: "Aufgrund der Grösse der Praxis muss dies individuell beurteilt werden, gerne sprechen wir mit Ihnen dazu:" };
+            return { multiples: null, message: "Aufgrund der Grösse Ihrer Praxis muss dies individuell beurteilt werden. Sehr gerne sprechen wir mit Ihnen dazu." };
         }
     }
 
