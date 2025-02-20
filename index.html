@@ -148,7 +148,7 @@
         </tbody>
     </table>
 
-    <button type="button" onclick="calculate()">Calculate</button>
+    <button type="button" onclick="calculate()">Berechnen</button>
 
     <div id="output-section" style="display:none;">
         <div class="output-field">
@@ -210,36 +210,18 @@
         const fte2023 = parseFloat(document.getElementById('fte2023').value) || 0;
         const fte2024 = parseFloat(document.getElementById('fte2024').value) || 0;
 
-        const totalCosts2023 = materialaufwand2023 + personalaufwand2023 + weiterbildungsaufwand2023 + raumkosten2023 + energieEntsorgung2023 +
-                               unterhaltRepErsatz2023 + uRfahrzeuge2023 + leasingkosten2023 + sachversicherungen2023 + bueroVerwaltungskosten2023 +
-                               beraterhonorare2023 + werbungMarketing2023 + reiseRepKosten2023 + sonstigeOperativeKosten2023 + sonstigerErtrag2023 + unternehmerlohn2023;
+        // Calculate EBITDA for both years
+        const ebitda2023 = revenue2023 - (materialaufwand2023 + personalaufwand2023 + weiterbildungsaufwand2023 + raumkosten2023 + energieEntsorgung2023 + unterhaltRepErsatz2023 + uRfahrzeuge2023 + leasingkosten2023 + sachversicherungen2023 + bueroVerwaltungskosten2023 + beraterhonorare2023 + werbungMarketing2023 + reiseRepKosten2023 + sonstigeOperativeKosten2023 + sonstigerErtrag2023 + unternehmerlohn2023);
+        const ebitda2024 = revenue2024 - (materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 + raumkosten2024 + energieEntsorgung2024 + unterhaltRepErsatz2024 + uRfahrzeuge2024 + leasingkosten2024 + sachversicherungen2024 + bueroVerwaltungskosten2024 + beraterhonorare2024 + werbungMarketing2024 + reiseRepKosten2024 + sonstigeOperativeKosten2024 + sonstigerErtrag2024 + unternehmerlohn2024);
 
-        const totalCosts2024 = materialaufwand2024 + personalaufwand2024 + weiterbildungsaufwand2024 + raumkosten2024 + energieEntsorgung2024 +
-                               unterhaltRepErsatz2024 + uRfahrzeuge2024 + leasingkosten2024 + sachversicherungen2024 + bueroVerwaltungskosten2024 +
-                               beraterhonorare2024 + werbungMarketing2024 + reiseRepKosten2024 + sonstigeOperativeKosten2024 + sonstigerErtrag2024 + unternehmerlohn2024;
+        // Calculate valuation based on EBITDA for 2024
+        const [lowMultiple, highMultiple] = getMultipleRange(ebitda2024);
+        const companyValueLow = ebitda2024 * lowMultiple;
+        const companyValueHigh = ebitda2024 * highMultiple;
 
-        const netRevenue2023 = revenue2023 - totalCosts2023;
-        const netRevenue2024 = revenue2024 - totalCosts2024;
-
-        const ebitda2024 = netRevenue2024 * 0.3;
-
-        const [multipleMin, multipleMax] = getMultipleRange(ebitda2024);
-
-        const companyValueMin = ebitda2024 * multipleMin;
-        const companyValueMax = ebitda2024 * multipleMax;
-
-        let message = "";
-
-        if (ebitda2024 < 200000 && fte2024 < 4) {
-            message = "Praxis ist leider zu klein für eine automatisches Gutachten, bitte wenden Sie sich an Ihren Treuhandexperten.";
-        } else if (ebitda2024 >= 1200000) {
-            message = "Aufgrund der Grösse der Praxis muss dies individuell beurteilt werden, gerne sprechen wir mit Ihnen dazu.";
-        } else {
-            message = "Basierend auf einer ersten Einschätzung könnte Ihre Praxis den folgenden Unternehmenswert aufweisen. Wenn Sie mehr erfahren wollen, kontaktieren Sie uns.";
-        }
-
-        document.getElementById('companyValue2024').textContent = `${companyValueMin.toFixed(2)} - ${companyValueMax.toFixed(2)}`;
-        document.getElementById('message').textContent = message;
+        // Show results
+        document.getElementById('companyValue2024').innerText = `CHF ${companyValueLow.toFixed(0)} - CHF ${companyValueHigh.toFixed(0)}`;
+        document.getElementById('message').innerText = `EBITDA 2024: CHF ${ebitda2024.toFixed(0)}`;
 
         document.getElementById('output-section').style.display = 'block';
     }
